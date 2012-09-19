@@ -14,12 +14,16 @@
 		41D95D051608A4B50084AD0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D95D041608A4B50084AD0D /* main.m */; };
 		41D95D091608A4B50084AD0D /* CDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D95D081608A4B50084AD0D /* CDAppDelegate.m */; };
 		41D95D0C1608A4B50084AD0D /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41D95D0A1608A4B50084AD0D /* MainStoryboard.storyboard */; };
-		41D95D0F1608A4B50084AD0D /* CDFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D95D0E1608A4B50084AD0D /* CDFirstViewController.m */; };
 		41D95D111608A4B50084AD0D /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 41D95D101608A4B50084AD0D /* first.png */; };
 		41D95D131608A4B50084AD0D /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 41D95D121608A4B50084AD0D /* first@2x.png */; };
 		41D95D161608A4B50084AD0D /* CDSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D95D151608A4B50084AD0D /* CDSecondViewController.m */; };
 		41D95D181608A4B50084AD0D /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 41D95D171608A4B50084AD0D /* second.png */; };
 		41D95D1A1608A4B50084AD0D /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 41D95D191608A4B50084AD0D /* second@2x.png */; };
+		41D95D241608A54D0084AD0D /* CDDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D95D231608A54D0084AD0D /* CDDataManager.m */; };
+		41D95D281608A6300084AD0D /* CDDocumentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D95D271608A6300084AD0D /* CDDocumentsTableViewController.m */; };
+		41D95D2B1608A74D0084AD0D /* CDDocumentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D95D2A1608A74D0084AD0D /* CDDocumentViewModel.m */; };
+		41D95D2E1608A9A30084AD0D /* CDDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D95D2D1608A9A30084AD0D /* CDDocument.m */; };
+		41D95D311608BB950084AD0D /* NSObject+PerformBlockAfterDelay.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D95D301608BB950084AD0D /* NSObject+PerformBlockAfterDelay.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,14 +38,22 @@
 		41D95D071608A4B50084AD0D /* CDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDAppDelegate.h; sourceTree = "<group>"; };
 		41D95D081608A4B50084AD0D /* CDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDAppDelegate.m; sourceTree = "<group>"; };
 		41D95D0B1608A4B50084AD0D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		41D95D0D1608A4B50084AD0D /* CDFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDFirstViewController.h; sourceTree = "<group>"; };
-		41D95D0E1608A4B50084AD0D /* CDFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDFirstViewController.m; sourceTree = "<group>"; };
 		41D95D101608A4B50084AD0D /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		41D95D121608A4B50084AD0D /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
 		41D95D141608A4B50084AD0D /* CDSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDSecondViewController.h; sourceTree = "<group>"; };
 		41D95D151608A4B50084AD0D /* CDSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDSecondViewController.m; sourceTree = "<group>"; };
 		41D95D171608A4B50084AD0D /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		41D95D191608A4B50084AD0D /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		41D95D221608A54D0084AD0D /* CDDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDataManager.h; sourceTree = "<group>"; };
+		41D95D231608A54D0084AD0D /* CDDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDataManager.m; sourceTree = "<group>"; };
+		41D95D261608A6300084AD0D /* CDDocumentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDocumentsTableViewController.h; sourceTree = "<group>"; };
+		41D95D271608A6300084AD0D /* CDDocumentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDocumentsTableViewController.m; sourceTree = "<group>"; };
+		41D95D291608A74D0084AD0D /* CDDocumentViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDocumentViewModel.h; sourceTree = "<group>"; };
+		41D95D2A1608A74D0084AD0D /* CDDocumentViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDocumentViewModel.m; sourceTree = "<group>"; };
+		41D95D2C1608A9A30084AD0D /* CDDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDocument.h; sourceTree = "<group>"; };
+		41D95D2D1608A9A30084AD0D /* CDDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDocument.m; sourceTree = "<group>"; };
+		41D95D2F1608BB950084AD0D /* NSObject+PerformBlockAfterDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PerformBlockAfterDelay.h"; sourceTree = "<group>"; };
+		41D95D301608BB950084AD0D /* NSObject+PerformBlockAfterDelay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PerformBlockAfterDelay.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,18 +100,14 @@
 		41D95CFE1608A4B50084AD0D /* LotsOfManagers */ = {
 			isa = PBXGroup;
 			children = (
-				41D95D071608A4B50084AD0D /* CDAppDelegate.h */,
-				41D95D081608A4B50084AD0D /* CDAppDelegate.m */,
-				41D95D0A1608A4B50084AD0D /* MainStoryboard.storyboard */,
-				41D95D0D1608A4B50084AD0D /* CDFirstViewController.h */,
-				41D95D0E1608A4B50084AD0D /* CDFirstViewController.m */,
-				41D95D101608A4B50084AD0D /* first.png */,
-				41D95D121608A4B50084AD0D /* first@2x.png */,
-				41D95D141608A4B50084AD0D /* CDSecondViewController.h */,
-				41D95D151608A4B50084AD0D /* CDSecondViewController.m */,
-				41D95D171608A4B50084AD0D /* second.png */,
-				41D95D191608A4B50084AD0D /* second@2x.png */,
+				41D95D251608A61E0084AD0D /* Documents Table */,
+				41D95D201608A52C0084AD0D /* DataManager */,
+				41D95D211608A53D0084AD0D /* Default Stuff */,
 				41D95CFF1608A4B50084AD0D /* Supporting Files */,
+				41D95D2C1608A9A30084AD0D /* CDDocument.h */,
+				41D95D2D1608A9A30084AD0D /* CDDocument.m */,
+				41D95D2F1608BB950084AD0D /* NSObject+PerformBlockAfterDelay.h */,
+				41D95D301608BB950084AD0D /* NSObject+PerformBlockAfterDelay.m */,
 			);
 			path = LotsOfManagers;
 			sourceTree = "<group>";
@@ -113,6 +121,42 @@
 				41D95D061608A4B50084AD0D /* LotsOfManagers-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		41D95D201608A52C0084AD0D /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				41D95D221608A54D0084AD0D /* CDDataManager.h */,
+				41D95D231608A54D0084AD0D /* CDDataManager.m */,
+			);
+			name = DataManager;
+			sourceTree = "<group>";
+		};
+		41D95D211608A53D0084AD0D /* Default Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				41D95D071608A4B50084AD0D /* CDAppDelegate.h */,
+				41D95D081608A4B50084AD0D /* CDAppDelegate.m */,
+				41D95D0A1608A4B50084AD0D /* MainStoryboard.storyboard */,
+				41D95D101608A4B50084AD0D /* first.png */,
+				41D95D121608A4B50084AD0D /* first@2x.png */,
+				41D95D141608A4B50084AD0D /* CDSecondViewController.h */,
+				41D95D151608A4B50084AD0D /* CDSecondViewController.m */,
+				41D95D171608A4B50084AD0D /* second.png */,
+				41D95D191608A4B50084AD0D /* second@2x.png */,
+			);
+			name = "Default Stuff";
+			sourceTree = "<group>";
+		};
+		41D95D251608A61E0084AD0D /* Documents Table */ = {
+			isa = PBXGroup;
+			children = (
+				41D95D261608A6300084AD0D /* CDDocumentsTableViewController.h */,
+				41D95D271608A6300084AD0D /* CDDocumentsTableViewController.m */,
+				41D95D291608A74D0084AD0D /* CDDocumentViewModel.h */,
+				41D95D2A1608A74D0084AD0D /* CDDocumentViewModel.m */,
+			);
+			name = "Documents Table";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,8 +229,12 @@
 			files = (
 				41D95D051608A4B50084AD0D /* main.m in Sources */,
 				41D95D091608A4B50084AD0D /* CDAppDelegate.m in Sources */,
-				41D95D0F1608A4B50084AD0D /* CDFirstViewController.m in Sources */,
 				41D95D161608A4B50084AD0D /* CDSecondViewController.m in Sources */,
+				41D95D241608A54D0084AD0D /* CDDataManager.m in Sources */,
+				41D95D281608A6300084AD0D /* CDDocumentsTableViewController.m in Sources */,
+				41D95D2B1608A74D0084AD0D /* CDDocumentViewModel.m in Sources */,
+				41D95D2E1608A9A30084AD0D /* CDDocument.m in Sources */,
+				41D95D311608BB950084AD0D /* NSObject+PerformBlockAfterDelay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 //
-//  CDFirstViewController.h
+//  CDDocumentsTableViewController.h
 //  LotsOfManagers
 //
 //  Created by Daniel Schneller on 18.09.12.
@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CDDocumentViewModel.h"
+#import "CDDataManager.h"
 
-@interface CDFirstViewController : UIViewController
+@interface CDDocumentsTableViewController : UITableViewController
 
 @end
