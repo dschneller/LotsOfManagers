@@ -9,6 +9,8 @@
 #import "CDDocumentsTableViewController.h"
 #import "CDDocument.h"
 
+#define WINDOW_TRASHOLD 50
+
 @interface CDDocumentsTableViewController ()
 @property (nonatomic, readonly, getter = isScrollingFast) BOOL scrollingFast;
 
@@ -33,7 +35,7 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
 - (void)viewDidLoad
 {
     _totalCount = 0;
-    _cachedRange = NSMakeRange(0, 100);
+    _cachedRange = NSMakeRange(0, 3*WINDOW_TRASHOLD);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -48,7 +50,7 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
     if (_displayedItems == nil)
     {
         [[CDDataManager instance] retrieveElementCountForTaskId:@"count.all"];
-        [[CDDataManager instance] retrieveDocumentsInRange:_cachedRange forTaskId:@"docs.all"];
+        [[CDDataManager instance] retrieveDocumentsInRange:_cachedRange forTaskId:@"docs.all_0"];
     }
 }
 
@@ -87,6 +89,8 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
 {
     NSArray* documents = notification.object;
     NSDictionary* userInfo = notification.userInfo;
+    NSNumber *n_loc = [userInfo valueForKey:@"range"];
+    NSUInteger loc = [n_loc unsignedIntegerValue];
     
     NSMutableArray* newDisplayedItems = [NSMutableArray arrayWithCapacity:documents.count];
     
@@ -98,8 +102,9 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
     
         [newDisplayedItems addObject:viewModel];
     }
+    _cachedRange = NSMakeRange(loc, 3*WINDOW_TRASHOLD);
     _displayedItems = newDisplayedItems;
-    
+    NSLog(@"New documents arrived");
     [self.tableView reloadData];
 }
 
@@ -162,26 +167,46 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
     CDDocumentViewModel* viewModel;
     if (self.isScrollingFast)
     {
-        cell.textLabel.text = @"--- ---";
+        cell.textLabel.text = [NSString stringWithFormat:@"%d --- ---", indexPath.row];
     }
     else
     {
         @try {
-            viewModel = [_displayedItems objectAtIndex:indexPath.row];
+            viewModel = [_displayedItems objectAtIndex:indexPath.row-_cachedRange.location];
         }
         @catch (NSException *exception) {
         }
         
         if (viewModel == nil)
         {
-            cell.textLabel.text = @"...";
+            cell.textLabel.text = [NSString stringWithFormat:@"%d ...", indexPath.row];
         }
         else
         {
-            cell.textLabel.text = [NSString stringWithFormat:@"File: %@", viewModel.documentFileName];
+            cell.textLabel.text = [NSString stringWithFormat:@"%d File: %@",indexPath.row, viewModel.documentFileName];
         }
     }
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(self.isScrollingFast)return;
+    
+    int row = indexPath.row;    
+    if(row % WINDOW_TRASHOLD != 0)return;
+    
+    int location = (row-WINDOW_TRASHOLD)/WINDOW_TRASHOLD*WINDOW_TRASHOLD;
+    if(location < 0) {
+        location = 0;
+    }
+    
+    if(location == _cachedRange.location)return;
+    
+    NSRange range = NSMakeRange(location, 3*WINDOW_TRASHOLD);
+    
+    // order data manager to fetch documents in given range
+    [[CDDataManager instance] retrieveDocumentsInRange:range forTaskId:[NSString stringWithFormat:@"docs.all_%d", range.location]];
 }
 
 #pragma mark - Table view delegate

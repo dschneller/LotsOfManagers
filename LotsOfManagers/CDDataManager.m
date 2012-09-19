@@ -10,7 +10,6 @@
 #import "CDDocument.h"
 #import "NSObject+PerformBlockAfterDelay.h"
 
-
 @implementation CDDataManager
 {
     NSArray* _queryResultAllDocuments;
@@ -18,7 +17,6 @@
     
     NSMutableArray* _queuedTasks;
 }
-
 
 + (id) instance
 {
@@ -29,8 +27,6 @@
     });
     return __sharedInstance;
 }
-
-
 
 
 - (id)init
@@ -97,7 +93,7 @@
     [_queuedTasks removeObject:taskId];
 
 }
-
+  
 - (void) retrieveDocumentsInRange:(NSRange)range forTaskId:(NSString*)taskId
 {
     @synchronized(_queuedTasks)
@@ -119,10 +115,14 @@
 
 - (void) sendOutDocumentNotifications:(NSRange)range forTaskId:(NSString*) taskId
 {
-    NSDictionary* userInfo = [NSDictionary dictionaryWithObject:taskId forKey:@"taskId"];
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+    [userInfo setValue:taskId forKey:@"taskId"];
+    [userInfo setValue:[NSNumber numberWithInteger:range.location] forKey:@"range"];
     
-    if ([@"docs.all" isEqualToString:taskId])
+    if ([taskId hasPrefix:@"docs.all"])
     {
+        if(range.location+range.length > _queryResultAllDocuments.count)range.length=_queryResultAllDocuments.count - range.location;
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:DOCUMENTS_RETRIEVED_NOTIFICATION
                                                             object:[_queryResultAllDocuments subarrayWithRange:range]
                                                           userInfo:userInfo];
@@ -130,10 +130,11 @@
     else if ([@"docs.inbox" isEqualToString:taskId])
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:DOCUMENTS_RETRIEVED_NOTIFICATION
-                                                            object:[_queryResultInboxOnly                                                                    subarrayWithRange:range]
+                                                            object:[_queryResultInboxOnly subarrayWithRange:range]
                                                           userInfo:userInfo];
     }
-
+    
+    [_queuedTasks removeObject:taskId];
 }
 
 @end
