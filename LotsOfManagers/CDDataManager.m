@@ -93,7 +93,7 @@
     [_queuedTasks removeObject:taskId];
 
 }
-  
+
 - (void) retrieveDocumentsInRange:(NSRange)range forTaskId:(NSString*)taskId
 {
     @synchronized(_queuedTasks)
