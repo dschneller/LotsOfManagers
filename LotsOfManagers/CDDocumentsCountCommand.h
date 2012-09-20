@@ -10,6 +10,6 @@
 
 @interface CDDocumentsCountCommand : CDCommand
 
-@property(nonatomic, assign) NSUInteger hits;
+@property(nonatomic, strong) NSNumber *count;
 
 @end

@@ -18,4 +18,9 @@
 	//nothing to do
 }
 
+
+-(void)cancel {
+	//abstract method
+}
+
 @end

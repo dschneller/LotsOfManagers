@@ -7,9 +7,14 @@
 //
 
 #import "CDTask.h"
+#import "CDDocumentsCountCommand.h"
 
-@interface CDDocumentsCountTask : CDTask
+@class CDCommand;
+
+@interface CDDocumentsCountTask : CDTask <CommandResult>
 
 @property (nonatomic, assign) NSUInteger count;
+
+@property (nonatomic, strong) CDDocumentsCountCommand *documentsCountCommand;
 
 @end

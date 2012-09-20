@@ -8,6 +8,7 @@
 
 #import "CDTaskBuilder.h"
 #import "CDDocumentsCountTask.h"
+#import "CDDocumentsCountCommand.h"
 
 @implementation CDTaskBuilder
 
@@ -30,11 +31,13 @@
     return self;
 }
 
-
+// Create count task.
 -(CDTask *)createCountTask {
 	CDDocumentsCountTask *task = [[CDDocumentsCountTask alloc] init];
 	task.taskId = [NSString stringWithFormat:@"count.all"];
-	//add command(s) to task
+	CDDocumentsCountCommand *command = [[CDDocumentsCountCommand alloc] init];
+	command.delegate = task;
+	task.documentsCountCommand = command;
 	return task;
 }
 

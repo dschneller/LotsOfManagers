@@ -9,6 +9,7 @@
 #import "CDDataManager.h"
 #import "CDDocument.h"
 #import "NSObject+PerformBlockAfterDelay.h"
+#import "CDTaskBuilder.h"
 
 @implementation CDDataManager
 {
@@ -116,13 +117,13 @@
 
 - (void)retrieveElementCount {
 	// create task, add task to task manager
-	//[[CDTaskManager instance] addTask:task];
+	CDTask *task = [[CDTaskBuilder instance] createCountTask];
+	[[CDTaskManager instance] addTask:task];
 }
 
 
 - (void)retrieveDocumentsInRange:(NSRange)range {
 	//[[CDTaskManager instance] addTask:task];
-	//TODO: save localy and fire the task
 }
 
 - (void) sendOutDocumentNotifications:(NSRange)range forTaskId:(NSString*) taskId

@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "CDTask.h"
 
-@interface CDTaskManager : NSObject
+@interface CDTaskManager : NSObject <CDTaskDelegate>
 
 @property(nonatomic, strong, readonly) NSMutableArray *queuedTasks;
 
 -(void)addTask:(CDTask *)task;
 +(id) instance;
+
 
 @end

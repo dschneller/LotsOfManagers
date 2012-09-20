@@ -7,10 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NSObject+PerformBlockAfterDelay.h"
+
+@class CDCommand;
+
+@protocol CommandResult <NSObject>
+
+- (void) processCommandResult:(CDCommand *)command result:(id)result message:(NSString *)message;
+
+@end
 
 @interface CDCommand : NSObject
 
+@property(nonatomic, weak) id<CommandResult> delegate;
+
+@property(nonatomic, assign, getter = isFinished) BOOL finished;
+
 -(void)execute;
 -(void)didFinishWithResult:(id)result;
+-(void)cancel;
 
 @end
+
+
