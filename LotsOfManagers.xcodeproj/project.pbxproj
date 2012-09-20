@@ -24,6 +24,7 @@
 		41D95D2B1608A74D0084AD0D /* CDDocumentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D95D2A1608A74D0084AD0D /* CDDocumentViewModel.m */; };
 		41D95D2E1608A9A30084AD0D /* CDDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D95D2D1608A9A30084AD0D /* CDDocument.m */; };
 		41D95D311608BB950084AD0D /* NSObject+PerformBlockAfterDelay.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D95D301608BB950084AD0D /* NSObject+PerformBlockAfterDelay.m */; };
+		F08936F1160B658000D5DFE4 /* CDDataRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F08936F0160B658000D5DFE4 /* CDDataRepository.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,8 @@
 		41D95D2D1608A9A30084AD0D /* CDDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDocument.m; sourceTree = "<group>"; };
 		41D95D2F1608BB950084AD0D /* NSObject+PerformBlockAfterDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PerformBlockAfterDelay.h"; sourceTree = "<group>"; };
 		41D95D301608BB950084AD0D /* NSObject+PerformBlockAfterDelay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PerformBlockAfterDelay.m"; sourceTree = "<group>"; };
+		F08936EF160B658000D5DFE4 /* CDDataRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDataRepository.h; sourceTree = "<group>"; };
+		F08936F0160B658000D5DFE4 /* CDDataRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDataRepository.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +103,7 @@
 		41D95CFE1608A4B50084AD0D /* LotsOfManagers */ = {
 			isa = PBXGroup;
 			children = (
+				F08936ED160B655000D5DFE4 /* DataRepository */,
 				41D95D251608A61E0084AD0D /* Documents Table */,
 				41D95D201608A52C0084AD0D /* DataManager */,
 				41D95D211608A53D0084AD0D /* Default Stuff */,
@@ -157,6 +161,15 @@
 				41D95D2A1608A74D0084AD0D /* CDDocumentViewModel.m */,
 			);
 			name = "Documents Table";
+			sourceTree = "<group>";
+		};
+		F08936ED160B655000D5DFE4 /* DataRepository */ = {
+			isa = PBXGroup;
+			children = (
+				F08936EF160B658000D5DFE4 /* CDDataRepository.h */,
+				F08936F0160B658000D5DFE4 /* CDDataRepository.m */,
+			);
+			name = DataRepository;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,6 +248,7 @@
 				41D95D2B1608A74D0084AD0D /* CDDocumentViewModel.m in Sources */,
 				41D95D2E1608A9A30084AD0D /* CDDocument.m in Sources */,
 				41D95D311608BB950084AD0D /* NSObject+PerformBlockAfterDelay.m in Sources */,
+				F08936F1160B658000D5DFE4 /* CDDataRepository.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +366,7 @@
 				41D95D1F1608A4B50084AD0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
