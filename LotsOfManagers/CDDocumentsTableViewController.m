@@ -13,7 +13,6 @@
 
 @interface CDDocumentsTableViewController ()
 @property (nonatomic, readonly, getter = isScrollingFast) BOOL scrollingFast;
-
 @end
 
 @implementation CDDocumentsTableViewController
@@ -21,7 +20,7 @@
     NSMutableArray* _displayedItems;
     NSUInteger _totalCount;
     NSRange _cachedRange;
-    
+    NSMutableArray* _selectedRows;
     
     // used to determine scrolling speed
     NSTimeInterval _lastOffsetCapture;
@@ -36,15 +35,22 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
 {
     _totalCount = 0;
     _cachedRange = NSMakeRange(0, 3*WINDOW_TRASHOLD);
+    _selectedRows = [NSMutableArray array];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(handleDocumentsReceivedNotification:) name:DOCUMENTS_RETRIEVED_NOTIFICATION object:nil];
+     addObserver:self
+     selector:@selector(handleDocumentsReceivedNotification:)
+     name:DOCUMENTS_RETRIEVED_NOTIFICATION
+     object:nil];
 
     [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(handleElementCountReceivedNotification:) name:ELEMENT_COUNT_RETRIEVED_NOTIFICATION object:nil];
+     addObserver:self
+     selector:@selector(handleElementCountReceivedNotification:)
+     name:ELEMENT_COUNT_RETRIEVED_NOTIFICATION
+     object:nil];
 
     
     if (_displayedItems == nil)
@@ -162,7 +168,7 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
+
     CDDocumentViewModel* viewModel;
     if (self.isScrollingFast)
     {
@@ -190,6 +196,13 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if([_selectedRows containsObject:[NSNumber numberWithInteger:indexPath.row]]) {
+        cell.selected = YES;
+        [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }else{
+        cell.selected = NO;
+    }
+    
     if(self.isScrollingFast)return;
     
     int row = indexPath.row;    
@@ -205,20 +218,21 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
     NSRange range = NSMakeRange(location, 3*WINDOW_TRASHOLD);
     
     // order data manager to fetch documents in given range
-    [[CDDataManager instance] retrieveDocumentsInRange:range forTaskId:[NSString stringWithFormat:@"docs.all_%d", range.location]];
+    [[CDDataManager instance] retrieveDocumentsInRange:range
+                                             forTaskId:[NSString stringWithFormat:@"docs.all_%d", range.location]];
 }
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    NSNumber* row = [NSNumber numberWithInteger:indexPath.row];
+    [_selectedRows addObject:row];
+}
+
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [_selectedRows removeObject:[NSNumber numberWithInteger:indexPath.row]];
 }
 
 @end
