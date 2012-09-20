@@ -78,7 +78,6 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
 - (void) handleElementCountReceivedNotification:(NSNotification*)notification
 {
     NSNumber* elementCount = notification.object;
-    NSDictionary* userInfo = notification.userInfo;
     
     _totalCount = [elementCount unsignedIntegerValue];
     _displayedItems = nil;
