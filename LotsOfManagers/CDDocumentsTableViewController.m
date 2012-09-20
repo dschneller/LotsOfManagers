@@ -193,7 +193,7 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
     if(self.isScrollingFast)return;
     
     int row = indexPath.row;    
-    if(row % WINDOW_TRASHOLD != 0)return;
+    if(row % 15 != 0)return;
     
     int location = (row-WINDOW_TRASHOLD)/WINDOW_TRASHOLD*WINDOW_TRASHOLD;
     if(location < 0) {
