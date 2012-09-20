@@ -113,6 +113,18 @@
     
 }
 
+
+- (void)retrieveElementCount {
+	// create task, add task to task manager
+	//[[CDTaskManager instance] addTask:task];
+}
+
+
+- (void)retrieveDocumentsInRange:(NSRange)range {
+	//[[CDTaskManager instance] addTask:task];
+	//TODO: save localy and fire the task
+}
+
 - (void) sendOutDocumentNotifications:(NSRange)range forTaskId:(NSString*) taskId
 {
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
@@ -136,5 +148,8 @@
     
     [_queuedTasks removeObject:taskId];
 }
+
+
+
 
 @end
