@@ -9,11 +9,13 @@
 #import "CDTask.h"
 #import "CDDocumentMetadataCommand.h"
 
-@interface CDDocumentsMetadataTask : CDTask
+@class CDCommand;
+
+@interface CDDocumentsMetadataTask : CDTask <CDCommandResult>
 
 @property(nonatomic, assign) NSUInteger row;
 @property(nonatomic, assign) NSUInteger offset;
 
-@property(nonatomic, strong) CDDocumentMetadataCommand *command;
+@property(nonatomic, strong) CDDocumentMetadataCommand *documentsMetadataCommand;
 
 @end

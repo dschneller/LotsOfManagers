@@ -56,8 +56,10 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
     
     if (_displayedItems == nil)
     {
-        [[CDDataManager instance] retrieveElementCountForTaskId:@"count.all"];
-        [[CDDataManager instance] retrieveDocumentsInRange:_cachedRange forTaskId:@"docs.all_0"];
+		//[[CDDataManager instance] retrieveElementCountForTaskId:@"count.all"];
+		[[CDDataManager instance] retrieveElementCount];
+        //[[CDDataManager instance] retrieveDocumentsInRange:_cachedRange forTaskId:@"docs.all_0"];
+		[[CDDataManager instance] retrieveDocumentsInRange:_cachedRange];
     }
 }
 
@@ -84,6 +86,7 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
 #pragma mark - Handle Notifications
 - (void) handleElementCountReceivedNotification:(NSNotification*)notification
 {
+	NSLog(@"task count returns results : %@", notification.object);
     NSNumber* elementCount = notification.object;
     
     _totalCount = [elementCount unsignedIntegerValue];
@@ -93,9 +96,10 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
 
 - (void) handleDocumentsReceivedNotification:(NSNotification*)notification
 {
-    NSArray* documents = notification.object;
-    NSDictionary* userInfo = notification.userInfo;
-    NSNumber *n_loc = [userInfo valueForKey:@"range"];
+	NSLog(@"task documents returns results : %@", [notification.object description]);
+	NSMutableDictionary *result = notification.object;
+	NSArray *documents = [result valueForKey:@"documents"];
+	NSNumber *n_loc = [result valueForKey:@"range"];
     NSUInteger loc = [n_loc unsignedIntegerValue];
     
     NSMutableArray* newDisplayedItems = [NSMutableArray arrayWithCapacity:documents.count];
@@ -219,8 +223,9 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
     NSRange range = NSMakeRange(location, 3*WINDOW_TRASHOLD);
     
     // order data manager to fetch documents in given range
-    [[CDDataManager instance] retrieveDocumentsInRange:range
-                                             forTaskId:[NSString stringWithFormat:@"docs.all_%d", range.location]];
+//    [[CDDataManager instance] retrieveDocumentsInRange:range
+//                                             forTaskId:[NSString stringWithFormat:@"docs.all_%d", range.location]];
+	[[CDDataManager instance] retrieveDocumentsInRange:range];
 }
 
 #pragma mark - Table view delegate

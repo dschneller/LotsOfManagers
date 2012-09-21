@@ -47,6 +47,7 @@
 		task.delegate = self; //used to inform the task manager when the task is done with its job.
         [_queuedTasks addObject:task];
 		if (_queuedTasks.count == 1) {
+			NSLog(@"task executing : %@", ((CDTask *)[_queuedTasks objectAtIndex:0]).taskId);
 			[task execute];
 		}
     }
@@ -55,6 +56,7 @@
 
 -(void)removeTask {
 	if ([_queuedTasks objectAtIndex:0] != nil) {
+		NSLog(@"task removed : %@", ((CDTask *)[_queuedTasks objectAtIndex:0]).taskId);
 		[_queuedTasks removeObjectAtIndex:0];
 	}
 }
@@ -69,6 +71,7 @@
 	if (_queuedTasks.count > 0) {
 		CDTask *task = [_queuedTasks objectAtIndex:0];
 		[task execute];
+		NSLog(@"task executing : %@", ((CDTask *)[_queuedTasks objectAtIndex:0]).taskId);
 	}
 }
 

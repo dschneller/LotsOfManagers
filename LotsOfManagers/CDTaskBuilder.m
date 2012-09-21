@@ -9,6 +9,8 @@
 #import "CDTaskBuilder.h"
 #import "CDDocumentsCountTask.h"
 #import "CDDocumentsCountCommand.h"
+#import "CDDocumentsMetadataTask.h"
+#import "CDDocumentMetadataCommand.h"
 
 @implementation CDTaskBuilder
 
@@ -40,5 +42,17 @@
 	task.documentsCountCommand = command;
 	return task;
 }
+
+
+-(CDTask *)createDocumentsMetadataTaskInRange:(NSRange)range {
+	CDDocumentsMetadataTask *task = [[CDDocumentsMetadataTask alloc] init];
+	task.taskId = [NSString stringWithFormat:@"%@_%d", [task description], range.location];
+	CDDocumentMetadataCommand *command = [[CDDocumentMetadataCommand alloc] init];
+ 	command.delegate = task;
+	command.range = range;
+	task.documentsMetadataCommand = command;
+	return task;
+}
+
 
 @end

@@ -123,7 +123,9 @@
 
 
 - (void)retrieveDocumentsInRange:(NSRange)range {
-	//[[CDTaskManager instance] addTask:task];
+	// create task, add task to task manager
+	CDTask *task = [[CDTaskBuilder instance] createDocumentsMetadataTaskInRange:range];
+	[[CDTaskManager instance] addTask:task];
 }
 
 - (void) sendOutDocumentNotifications:(NSRange)range forTaskId:(NSString*) taskId

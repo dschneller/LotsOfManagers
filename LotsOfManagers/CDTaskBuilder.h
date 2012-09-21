@@ -21,4 +21,7 @@
 //create task whose responsability is to retrieve number of documents
 -(CDTask *)createCountTask;
 
+//create task for documents metadata retrieving which are in provided range
+-(CDTask *)createDocumentsMetadataTaskInRange:(NSRange)range;
+
 @end

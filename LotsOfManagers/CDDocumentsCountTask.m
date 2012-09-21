@@ -22,7 +22,8 @@
 
 - (void) processCommandResult:(CDCommand *)command result:(id)result message:(NSString *)message {
 	if (command.isFinished) { // command finished notify with result
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"documents.count.retrieved" object:((CDDocumentsCountCommand *)command).count userInfo:nil];
+		[self.delegate cdTaskDidFinished]; //task is finished it should be removed from the queue
+		[[NSNotificationCenter defaultCenter] postNotificationName:ELEMENT_COUNT_RETRIEVED_NOTIFICATION object:((CDDocumentsCountCommand *)command).count userInfo:nil];
 	}
 }
 

@@ -11,7 +11,7 @@
 
 @class CDCommand;
 
-@interface CDDocumentsCountTask : CDTask <CommandResult>
+@interface CDDocumentsCountTask : CDTask <CDCommandResult>
 
 @property (nonatomic, assign) NSUInteger count;
 

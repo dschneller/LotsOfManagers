@@ -11,7 +11,25 @@
 @implementation CDDocumentsMetadataTask
 
 -(NSString *)description {
-	return @"";
+	return @"docs.all";
+}
+
+
+-(void)execute {
+	[self.documentsMetadataCommand execute];
+}
+
+-(void)cancel {
+	[self.documentsMetadataCommand cancel];
+}
+
+- (void) processCommandResult:(CDCommand *)command result:(id)result message:(NSString *)message {
+	if (command.isFinished) { // command finished notify with result
+		NSMutableDictionary *dict = (NSMutableDictionary *)result;
+	    [dict setValue:self.taskId forKey:@"taskId"];
+		[self.delegate cdTaskDidFinished]; //task is finished it should be removed from the queue
+		[[NSNotificationCenter defaultCenter] postNotificationName:DOCUMENTS_RETRIEVED_NOTIFICATION object:dict userInfo:nil];
+	}
 }
 
 @end

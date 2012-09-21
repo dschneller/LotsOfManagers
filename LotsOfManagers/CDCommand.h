@@ -11,7 +11,7 @@
 
 @class CDCommand;
 
-@protocol CommandResult <NSObject>
+@protocol CDCommandResult <NSObject>
 
 - (void) processCommandResult:(CDCommand *)command result:(id)result message:(NSString *)message;
 
@@ -19,7 +19,7 @@
 
 @interface CDCommand : NSObject
 
-@property(nonatomic, weak) id<CommandResult> delegate;
+@property(nonatomic, weak) id<CDCommandResult> delegate;
 
 @property(nonatomic, assign, getter = isFinished) BOOL finished;
 

@@ -7,7 +7,7 @@
 //
 
 #import "CDDocumentsCountCommand.h"
-//#import "CDDataRepository.h"
+#import "CDDataRepository.h"
 
 @implementation CDDocumentsCountCommand
 
@@ -15,7 +15,7 @@
 -(void)execute {
     [self performBlock:^{
         [self callDataRepository];
-    } afterDelay:2.5f];
+    } afterDelay:0.5f];
 }
 
 -(void)didFinishWithResult:(id)result {
@@ -25,7 +25,7 @@
 
 
 -(void)callDataRepository {
-	//_count =
+	_count = [NSNumber numberWithUnsignedInt:[[CDDataRepository instance].documents count]];
 	[self didFinishWithResult:_count];
 }
 
