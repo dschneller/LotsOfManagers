@@ -21,16 +21,16 @@
 }
 
 
--(BOOL)isEqual:(id)object {
-	if(self == object){
+-(BOOL)isEqual:(id)other {
+	if(self == other){
 		return YES;
 	}
-	if(!object || ![object isKindOfClass:[self class]])
+	if(!other || ![other isKindOfClass:[self class]])
     {
         return NO;
     }
-	CDTask *other = (CDTask *)object;
-	return [self.taskId isEqualToString:other.taskId];
+	CDTask *o = (CDTask *)other;
+	return [self.taskId isEqualToString:o.taskId];
 }
 
 @end

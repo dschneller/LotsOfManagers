@@ -20,7 +20,7 @@
 
 @property (nonatomic, strong) NSString *taskId;
 @property (nonatomic, assign, getter = isFinished) BOOL finished;
-@property (nonatomic, weak) id <CDTaskDelegate> delegate; //used to inform task manager that it is finished its job, and that task manager can proceed other task
+@property (nonatomic, weak) id <CDTaskDelegate> delegate; //used to inform task manager that it is finished its job, and that task manager can proceed another task
 
 -(void)execute;
 -(void)cancel;

@@ -11,9 +11,6 @@
 
 @interface CDDocumentMetadataCommand : CDCommand
 
-@property (nonatomic, assign) NSUInteger row;
-@property (nonatomic, assign) NSUInteger offset;
-
 @property (nonatomic, readwrite) NSRange range;
 
 @end

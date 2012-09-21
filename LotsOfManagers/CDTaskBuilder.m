@@ -43,7 +43,7 @@
 	return task;
 }
 
-
+// create documents metadata task.
 -(CDTask *)createDocumentsMetadataTaskInRange:(NSRange)range {
 	CDDocumentsMetadataTask *task = [[CDDocumentsMetadataTask alloc] init];
 	task.taskId = [NSString stringWithFormat:@"%@_%d", [task description], range.location];

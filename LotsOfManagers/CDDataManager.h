@@ -13,10 +13,8 @@
 @interface CDDataManager : NSObject
 
 + (id) instance;
-- (void) retrieveDocumentsInRange:(NSRange)range
-                        forTaskId:(NSString*)taskId;
-- (void) retrieveElementCountForTaskId:(NSString*)taskId;
-
 - (void)retrieveDocumentsInRange:(NSRange)range;
 - (void)retrieveElementCount;
+
+
 @end
