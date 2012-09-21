@@ -56,7 +56,7 @@
 
 -(void)removeTask {
 	if ([_queuedTasks objectAtIndex:0] != nil) {
-		NSLog(@"task removed : %@", ((CDTask *)[_queuedTasks objectAtIndex:0]).taskId);
+		NSLog(@"task removed from queue : %@", ((CDTask *)[_queuedTasks objectAtIndex:0]).taskId);
 		[_queuedTasks removeObjectAtIndex:0];
 	}
 }

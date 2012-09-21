@@ -56,9 +56,7 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
     
     if (_displayedItems == nil)
     {
-		//[[CDDataManager instance] retrieveElementCountForTaskId:@"count.all"];
 		[[CDDataManager instance] retrieveElementCount];
-        //[[CDDataManager instance] retrieveDocumentsInRange:_cachedRange forTaskId:@"docs.all_0"];
 		[[CDDataManager instance] retrieveDocumentsInRange:_cachedRange];
     }
 }
@@ -68,14 +66,6 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -96,9 +86,9 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
 
 - (void) handleDocumentsReceivedNotification:(NSNotification*)notification
 {
-	NSLog(@"task documents returns results : %@", [notification.object description]);
 	NSMutableDictionary *result = notification.object;
 	NSArray *documents = [result valueForKey:@"documents"];
+	NSLog(@"task documents %@ returns results", [result valueForKey:@"taskId"]);
 	NSNumber *n_loc = [result valueForKey:@"range"];
     NSUInteger loc = [n_loc unsignedIntegerValue];
     
@@ -114,7 +104,6 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
     }
     _cachedRange = NSMakeRange(loc, 3*WINDOW_TRASHOLD);
     _displayedItems = newDisplayedItems;
-    NSLog(@"New documents arrived");
     [self.tableView reloadData];
 }
 
@@ -223,8 +212,6 @@ CGFloat const kScrollSpeedThreshold = 4.0f;
     NSRange range = NSMakeRange(location, 3*WINDOW_TRASHOLD);
     
     // order data manager to fetch documents in given range
-//    [[CDDataManager instance] retrieveDocumentsInRange:range
-//                                             forTaskId:[NSString stringWithFormat:@"docs.all_%d", range.location]];
 	[[CDDataManager instance] retrieveDocumentsInRange:range];
 }
 
