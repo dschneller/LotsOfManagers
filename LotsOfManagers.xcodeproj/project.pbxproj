@@ -7,6 +7,40 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41D4879B160B580600F0C457 /* AQGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D4878A160B57A900F0C457 /* AQGridView.m */; };
+		41D4879C160B580600F0C457 /* AQGridViewAnimatorItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D4878B160B57A900F0C457 /* AQGridViewAnimatorItem.m */; };
+		41D4879D160B580600F0C457 /* AQGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D4878C160B57A900F0C457 /* AQGridViewCell.m */; };
+		41D4879E160B580600F0C457 /* AQGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D4878D160B57A900F0C457 /* AQGridViewController.m */; };
+		41D4879F160B580600F0C457 /* AQGridViewData.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D4878E160B57A900F0C457 /* AQGridViewData.m */; };
+		41D487A0160B580600F0C457 /* AQGridViewUpdateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D4878F160B57A900F0C457 /* AQGridViewUpdateInfo.m */; };
+		41D487A1160B580600F0C457 /* AQGridViewUpdateItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D48790160B57A900F0C457 /* AQGridViewUpdateItem.m */; };
+		41D487A2160B580600F0C457 /* CDDocumentStackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D48791160B57A900F0C457 /* CDDocumentStackCell.m */; };
+		41D487A3160B580600F0C457 /* CDDocumentStackGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D48792160B57A900F0C457 /* CDDocumentStackGridViewController.m */; };
+		41D487A4160B580600F0C457 /* CDDocumentStackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D48793160B57A900F0C457 /* CDDocumentStackModel.m */; };
+		41D487A5160B580600F0C457 /* CustomBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D48794160B57A900F0C457 /* CustomBadge.m */; };
+		41D487A6160B580600F0C457 /* NSIndexSet+AQIndexesOutsideSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D48795160B57A900F0C457 /* NSIndexSet+AQIndexesOutsideSet.m */; };
+		41D487A7160B580600F0C457 /* NSIndexSet+AQIsSetContiguous.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D48796160B57A900F0C457 /* NSIndexSet+AQIsSetContiguous.m */; };
+		41D487A8160B580600F0C457 /* UIColor+AQGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D48797160B57A900F0C457 /* UIColor+AQGridView.m */; };
+		41D487A9160B580600F0C457 /* CDDocumentStackCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 41D48799160B57A900F0C457 /* CDDocumentStackCell.xib */; };
+		41D487AA160B580600F0C457 /* CDPullToRefreshScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D4879A160B57A900F0C457 /* CDPullToRefreshScrollView.m */; };
+		41D487AD160B585100F0C457 /* CDDocumentGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D487AC160B585100F0C457 /* CDDocumentGridViewController.m */; };
+		41D487B2160B5A6000F0C457 /* AbstractEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D487AF160B5A6000F0C457 /* AbstractEntity.m */; };
+		41D487B3160B5A6000F0C457 /* AbstractEntityCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D487B1160B5A6000F0C457 /* AbstractEntityCollection.m */; };
+		41D487B5160B5F3100F0C457 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41D487B4160B5F3100F0C457 /* QuartzCore.framework */; };
+		41D487C4160B601300F0C457 /* stapel-1-cloud-ohne.png in Resources */ = {isa = PBXBuildFile; fileRef = 41D487B6160B601100F0C457 /* stapel-1-cloud-ohne.png */; };
+		41D487C5160B601300F0C457 /* stapel-1-cloud-ohne@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 41D487B7160B601100F0C457 /* stapel-1-cloud-ohne@2x.png */; };
+		41D487C6160B601300F0C457 /* stapel-1-cloud-pfeil.png in Resources */ = {isa = PBXBuildFile; fileRef = 41D487B8160B601100F0C457 /* stapel-1-cloud-pfeil.png */; };
+		41D487C7160B601300F0C457 /* stapel-1-cloud-pfeil@2x-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 41D487B9160B601100F0C457 /* stapel-1-cloud-pfeil@2x-1.png */; };
+		41D487C8160B601300F0C457 /* stapel-1-dots.png in Resources */ = {isa = PBXBuildFile; fileRef = 41D487BA160B601100F0C457 /* stapel-1-dots.png */; };
+		41D487C9160B601300F0C457 /* stapel-1-dots@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 41D487BB160B601100F0C457 /* stapel-1-dots@2x.png */; };
+		41D487CA160B601300F0C457 /* stapel-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 41D487BC160B601100F0C457 /* stapel-1.png */; };
+		41D487CB160B601300F0C457 /* stapel-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 41D487BD160B601200F0C457 /* stapel-1@2x.png */; };
+		41D487CC160B601300F0C457 /* stapel-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 41D487BE160B601200F0C457 /* stapel-2.png */; };
+		41D487CD160B601300F0C457 /* stapel-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 41D487BF160B601200F0C457 /* stapel-2@2x.png */; };
+		41D487CE160B601300F0C457 /* stapel-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 41D487C0160B601200F0C457 /* stapel-3.png */; };
+		41D487CF160B601300F0C457 /* stapel-3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 41D487C1160B601200F0C457 /* stapel-3@2x.png */; };
+		41D487D0160B601300F0C457 /* stapel-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 41D487C2160B601300F0C457 /* stapel-4.png */; };
+		41D487D1160B601300F0C457 /* stapel-4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 41D487C3160B601300F0C457 /* stapel-4@2x.png */; };
 		41D95CF91608A4B50084AD0D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41D95CF81608A4B50084AD0D /* UIKit.framework */; };
 		41D95CFB1608A4B50084AD0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41D95CFA1608A4B50084AD0D /* Foundation.framework */; };
 		41D95CFD1608A4B50084AD0D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41D95CFC1608A4B50084AD0D /* CoreGraphics.framework */; };
@@ -27,6 +61,61 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		41D48779160B57A900F0C457 /* AQGridView+CellLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AQGridView+CellLayout.h"; sourceTree = "<group>"; };
+		41D4877A160B57A900F0C457 /* AQGridView+CellLocationDelegation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AQGridView+CellLocationDelegation.h"; sourceTree = "<group>"; };
+		41D4877B160B57A900F0C457 /* AQGridView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AQGridView.h; sourceTree = "<group>"; };
+		41D4877C160B57A900F0C457 /* AQGridViewAnimatorItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AQGridViewAnimatorItem.h; sourceTree = "<group>"; };
+		41D4877D160B57A900F0C457 /* AQGridViewCell+AQGridViewCellPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AQGridViewCell+AQGridViewCellPrivate.h"; sourceTree = "<group>"; };
+		41D4877E160B57A900F0C457 /* AQGridViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AQGridViewCell.h; sourceTree = "<group>"; };
+		41D4877F160B57A900F0C457 /* AQGridViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AQGridViewController.h; sourceTree = "<group>"; };
+		41D48780160B57A900F0C457 /* AQGridViewData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AQGridViewData.h; sourceTree = "<group>"; };
+		41D48781160B57A900F0C457 /* AQGridViewUpdateInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AQGridViewUpdateInfo.h; sourceTree = "<group>"; };
+		41D48782160B57A900F0C457 /* AQGridViewUpdateItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AQGridViewUpdateItem.h; sourceTree = "<group>"; };
+		41D48783160B57A900F0C457 /* CDDocumentStackCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDDocumentStackCell.h; sourceTree = "<group>"; };
+		41D48784160B57A900F0C457 /* CDDocumentStackGridViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDDocumentStackGridViewController.h; sourceTree = "<group>"; };
+		41D48785160B57A900F0C457 /* CDDocumentStackModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDDocumentStackModel.h; sourceTree = "<group>"; };
+		41D48786160B57A900F0C457 /* CustomBadge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomBadge.h; sourceTree = "<group>"; };
+		41D48787160B57A900F0C457 /* NSIndexSet+AQIndexesOutsideSet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSIndexSet+AQIndexesOutsideSet.h"; sourceTree = "<group>"; };
+		41D48788160B57A900F0C457 /* NSIndexSet+AQIsSetContiguous.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSIndexSet+AQIsSetContiguous.h"; sourceTree = "<group>"; };
+		41D48789160B57A900F0C457 /* UIColor+AQGridView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+AQGridView.h"; sourceTree = "<group>"; };
+		41D4878A160B57A900F0C457 /* AQGridView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AQGridView.m; sourceTree = "<group>"; };
+		41D4878B160B57A900F0C457 /* AQGridViewAnimatorItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AQGridViewAnimatorItem.m; sourceTree = "<group>"; };
+		41D4878C160B57A900F0C457 /* AQGridViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AQGridViewCell.m; sourceTree = "<group>"; };
+		41D4878D160B57A900F0C457 /* AQGridViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AQGridViewController.m; sourceTree = "<group>"; };
+		41D4878E160B57A900F0C457 /* AQGridViewData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AQGridViewData.m; sourceTree = "<group>"; };
+		41D4878F160B57A900F0C457 /* AQGridViewUpdateInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AQGridViewUpdateInfo.m; sourceTree = "<group>"; };
+		41D48790160B57A900F0C457 /* AQGridViewUpdateItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AQGridViewUpdateItem.m; sourceTree = "<group>"; };
+		41D48791160B57A900F0C457 /* CDDocumentStackCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDDocumentStackCell.m; sourceTree = "<group>"; };
+		41D48792160B57A900F0C457 /* CDDocumentStackGridViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDDocumentStackGridViewController.m; sourceTree = "<group>"; };
+		41D48793160B57A900F0C457 /* CDDocumentStackModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDDocumentStackModel.m; sourceTree = "<group>"; };
+		41D48794160B57A900F0C457 /* CustomBadge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomBadge.m; sourceTree = "<group>"; };
+		41D48795160B57A900F0C457 /* NSIndexSet+AQIndexesOutsideSet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSIndexSet+AQIndexesOutsideSet.m"; sourceTree = "<group>"; };
+		41D48796160B57A900F0C457 /* NSIndexSet+AQIsSetContiguous.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSIndexSet+AQIsSetContiguous.m"; sourceTree = "<group>"; };
+		41D48797160B57A900F0C457 /* UIColor+AQGridView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AQGridView.m"; sourceTree = "<group>"; };
+		41D48798160B57A900F0C457 /* CDPullToRefreshScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDPullToRefreshScrollView.h; sourceTree = "<group>"; };
+		41D48799160B57A900F0C457 /* CDDocumentStackCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CDDocumentStackCell.xib; sourceTree = "<group>"; };
+		41D4879A160B57A900F0C457 /* CDPullToRefreshScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDPullToRefreshScrollView.m; sourceTree = "<group>"; };
+		41D487AB160B585100F0C457 /* CDDocumentGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDocumentGridViewController.h; sourceTree = "<group>"; };
+		41D487AC160B585100F0C457 /* CDDocumentGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDocumentGridViewController.m; sourceTree = "<group>"; };
+		41D487AE160B5A6000F0C457 /* AbstractEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractEntity.h; sourceTree = "<group>"; };
+		41D487AF160B5A6000F0C457 /* AbstractEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractEntity.m; sourceTree = "<group>"; };
+		41D487B0160B5A6000F0C457 /* AbstractEntityCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractEntityCollection.h; sourceTree = "<group>"; };
+		41D487B1160B5A6000F0C457 /* AbstractEntityCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractEntityCollection.m; sourceTree = "<group>"; };
+		41D487B4160B5F3100F0C457 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		41D487B6160B601100F0C457 /* stapel-1-cloud-ohne.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stapel-1-cloud-ohne.png"; sourceTree = "<group>"; };
+		41D487B7160B601100F0C457 /* stapel-1-cloud-ohne@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stapel-1-cloud-ohne@2x.png"; sourceTree = "<group>"; };
+		41D487B8160B601100F0C457 /* stapel-1-cloud-pfeil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stapel-1-cloud-pfeil.png"; sourceTree = "<group>"; };
+		41D487B9160B601100F0C457 /* stapel-1-cloud-pfeil@2x-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stapel-1-cloud-pfeil@2x-1.png"; sourceTree = "<group>"; };
+		41D487BA160B601100F0C457 /* stapel-1-dots.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stapel-1-dots.png"; sourceTree = "<group>"; };
+		41D487BB160B601100F0C457 /* stapel-1-dots@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stapel-1-dots@2x.png"; sourceTree = "<group>"; };
+		41D487BC160B601100F0C457 /* stapel-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stapel-1.png"; sourceTree = "<group>"; };
+		41D487BD160B601200F0C457 /* stapel-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stapel-1@2x.png"; sourceTree = "<group>"; };
+		41D487BE160B601200F0C457 /* stapel-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stapel-2.png"; sourceTree = "<group>"; };
+		41D487BF160B601200F0C457 /* stapel-2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stapel-2@2x.png"; sourceTree = "<group>"; };
+		41D487C0160B601200F0C457 /* stapel-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stapel-3.png"; sourceTree = "<group>"; };
+		41D487C1160B601200F0C457 /* stapel-3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stapel-3@2x.png"; sourceTree = "<group>"; };
+		41D487C2160B601300F0C457 /* stapel-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stapel-4.png"; sourceTree = "<group>"; };
+		41D487C3160B601300F0C457 /* stapel-4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stapel-4@2x.png"; sourceTree = "<group>"; };
 		41D95CF41608A4B50084AD0D /* LotsOfManagers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LotsOfManagers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41D95CF81608A4B50084AD0D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		41D95CFA1608A4B50084AD0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -61,6 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41D487B5160B5F3100F0C457 /* QuartzCore.framework in Frameworks */,
 				41D95CF91608A4B50084AD0D /* UIKit.framework in Frameworks */,
 				41D95CFB1608A4B50084AD0D /* Foundation.framework in Frameworks */,
 				41D95CFD1608A4B50084AD0D /* CoreGraphics.framework in Frameworks */,
@@ -70,9 +160,71 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41D48777160B579A00F0C457 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				41D487B6160B601100F0C457 /* stapel-1-cloud-ohne.png */,
+				41D487B7160B601100F0C457 /* stapel-1-cloud-ohne@2x.png */,
+				41D487B8160B601100F0C457 /* stapel-1-cloud-pfeil.png */,
+				41D487B9160B601100F0C457 /* stapel-1-cloud-pfeil@2x-1.png */,
+				41D487BA160B601100F0C457 /* stapel-1-dots.png */,
+				41D487BB160B601100F0C457 /* stapel-1-dots@2x.png */,
+				41D487BC160B601100F0C457 /* stapel-1.png */,
+				41D487BD160B601200F0C457 /* stapel-1@2x.png */,
+				41D487BE160B601200F0C457 /* stapel-2.png */,
+				41D487BF160B601200F0C457 /* stapel-2@2x.png */,
+				41D487C0160B601200F0C457 /* stapel-3.png */,
+				41D487C1160B601200F0C457 /* stapel-3@2x.png */,
+				41D487C2160B601300F0C457 /* stapel-4.png */,
+				41D487C3160B601300F0C457 /* stapel-4@2x.png */,
+				41D487AE160B5A6000F0C457 /* AbstractEntity.h */,
+				41D487AF160B5A6000F0C457 /* AbstractEntity.m */,
+				41D487B0160B5A6000F0C457 /* AbstractEntityCollection.h */,
+				41D487B1160B5A6000F0C457 /* AbstractEntityCollection.m */,
+				41D48779160B57A900F0C457 /* AQGridView+CellLayout.h */,
+				41D4877A160B57A900F0C457 /* AQGridView+CellLocationDelegation.h */,
+				41D4877B160B57A900F0C457 /* AQGridView.h */,
+				41D4877C160B57A900F0C457 /* AQGridViewAnimatorItem.h */,
+				41D4877D160B57A900F0C457 /* AQGridViewCell+AQGridViewCellPrivate.h */,
+				41D4877E160B57A900F0C457 /* AQGridViewCell.h */,
+				41D4877F160B57A900F0C457 /* AQGridViewController.h */,
+				41D48780160B57A900F0C457 /* AQGridViewData.h */,
+				41D48781160B57A900F0C457 /* AQGridViewUpdateInfo.h */,
+				41D48782160B57A900F0C457 /* AQGridViewUpdateItem.h */,
+				41D48783160B57A900F0C457 /* CDDocumentStackCell.h */,
+				41D48784160B57A900F0C457 /* CDDocumentStackGridViewController.h */,
+				41D48785160B57A900F0C457 /* CDDocumentStackModel.h */,
+				41D48786160B57A900F0C457 /* CustomBadge.h */,
+				41D48787160B57A900F0C457 /* NSIndexSet+AQIndexesOutsideSet.h */,
+				41D48788160B57A900F0C457 /* NSIndexSet+AQIsSetContiguous.h */,
+				41D48789160B57A900F0C457 /* UIColor+AQGridView.h */,
+				41D4878A160B57A900F0C457 /* AQGridView.m */,
+				41D4878B160B57A900F0C457 /* AQGridViewAnimatorItem.m */,
+				41D4878C160B57A900F0C457 /* AQGridViewCell.m */,
+				41D4878D160B57A900F0C457 /* AQGridViewController.m */,
+				41D4878E160B57A900F0C457 /* AQGridViewData.m */,
+				41D4878F160B57A900F0C457 /* AQGridViewUpdateInfo.m */,
+				41D48790160B57A900F0C457 /* AQGridViewUpdateItem.m */,
+				41D48791160B57A900F0C457 /* CDDocumentStackCell.m */,
+				41D48792160B57A900F0C457 /* CDDocumentStackGridViewController.m */,
+				41D48793160B57A900F0C457 /* CDDocumentStackModel.m */,
+				41D48794160B57A900F0C457 /* CustomBadge.m */,
+				41D48795160B57A900F0C457 /* NSIndexSet+AQIndexesOutsideSet.m */,
+				41D48796160B57A900F0C457 /* NSIndexSet+AQIsSetContiguous.m */,
+				41D48797160B57A900F0C457 /* UIColor+AQGridView.m */,
+				41D48798160B57A900F0C457 /* CDPullToRefreshScrollView.h */,
+				41D48799160B57A900F0C457 /* CDDocumentStackCell.xib */,
+				41D4879A160B57A900F0C457 /* CDPullToRefreshScrollView.m */,
+				41D487AB160B585100F0C457 /* CDDocumentGridViewController.h */,
+				41D487AC160B585100F0C457 /* CDDocumentGridViewController.m */,
+			);
+			name = Grid;
+			sourceTree = "<group>";
+		};
 		41D95CE91608A4B50084AD0D = {
 			isa = PBXGroup;
 			children = (
+				41D487B4160B5F3100F0C457 /* QuartzCore.framework */,
 				41D95CFE1608A4B50084AD0D /* LotsOfManagers */,
 				41D95CF71608A4B50084AD0D /* Frameworks */,
 				41D95CF51608A4B50084AD0D /* Products */,
@@ -100,6 +252,7 @@
 		41D95CFE1608A4B50084AD0D /* LotsOfManagers */ = {
 			isa = PBXGroup;
 			children = (
+				41D48777160B579A00F0C457 /* Grid */,
 				41D95D251608A61E0084AD0D /* Documents Table */,
 				41D95D201608A52C0084AD0D /* DataManager */,
 				41D95D211608A53D0084AD0D /* Default Stuff */,
@@ -217,6 +370,20 @@
 				41D95D131608A4B50084AD0D /* first@2x.png in Resources */,
 				41D95D181608A4B50084AD0D /* second.png in Resources */,
 				41D95D1A1608A4B50084AD0D /* second@2x.png in Resources */,
+				41D487C4160B601300F0C457 /* stapel-1-cloud-ohne.png in Resources */,
+				41D487C5160B601300F0C457 /* stapel-1-cloud-ohne@2x.png in Resources */,
+				41D487C6160B601300F0C457 /* stapel-1-cloud-pfeil.png in Resources */,
+				41D487C7160B601300F0C457 /* stapel-1-cloud-pfeil@2x-1.png in Resources */,
+				41D487C8160B601300F0C457 /* stapel-1-dots.png in Resources */,
+				41D487C9160B601300F0C457 /* stapel-1-dots@2x.png in Resources */,
+				41D487CA160B601300F0C457 /* stapel-1.png in Resources */,
+				41D487CB160B601300F0C457 /* stapel-1@2x.png in Resources */,
+				41D487CC160B601300F0C457 /* stapel-2.png in Resources */,
+				41D487CD160B601300F0C457 /* stapel-2@2x.png in Resources */,
+				41D487CE160B601300F0C457 /* stapel-3.png in Resources */,
+				41D487CF160B601300F0C457 /* stapel-3@2x.png in Resources */,
+				41D487D0160B601300F0C457 /* stapel-4.png in Resources */,
+				41D487D1160B601300F0C457 /* stapel-4@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +394,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41D4879B160B580600F0C457 /* AQGridView.m in Sources */,
+				41D4879C160B580600F0C457 /* AQGridViewAnimatorItem.m in Sources */,
+				41D4879D160B580600F0C457 /* AQGridViewCell.m in Sources */,
+				41D4879E160B580600F0C457 /* AQGridViewController.m in Sources */,
+				41D4879F160B580600F0C457 /* AQGridViewData.m in Sources */,
+				41D487A0160B580600F0C457 /* AQGridViewUpdateInfo.m in Sources */,
+				41D487A1160B580600F0C457 /* AQGridViewUpdateItem.m in Sources */,
+				41D487A2160B580600F0C457 /* CDDocumentStackCell.m in Sources */,
+				41D487A3160B580600F0C457 /* CDDocumentStackGridViewController.m in Sources */,
+				41D487A4160B580600F0C457 /* CDDocumentStackModel.m in Sources */,
+				41D487A5160B580600F0C457 /* CustomBadge.m in Sources */,
+				41D487A6160B580600F0C457 /* NSIndexSet+AQIndexesOutsideSet.m in Sources */,
+				41D487A7160B580600F0C457 /* NSIndexSet+AQIsSetContiguous.m in Sources */,
+				41D487A8160B580600F0C457 /* UIColor+AQGridView.m in Sources */,
+				41D487A9160B580600F0C457 /* CDDocumentStackCell.xib in Sources */,
+				41D487AA160B580600F0C457 /* CDPullToRefreshScrollView.m in Sources */,
 				41D95D051608A4B50084AD0D /* main.m in Sources */,
 				41D95D091608A4B50084AD0D /* CDAppDelegate.m in Sources */,
 				41D95D161608A4B50084AD0D /* CDSecondViewController.m in Sources */,
@@ -235,6 +418,9 @@
 				41D95D2B1608A74D0084AD0D /* CDDocumentViewModel.m in Sources */,
 				41D95D2E1608A9A30084AD0D /* CDDocument.m in Sources */,
 				41D95D311608BB950084AD0D /* NSObject+PerformBlockAfterDelay.m in Sources */,
+				41D487AD160B585100F0C457 /* CDDocumentGridViewController.m in Sources */,
+				41D487B2160B5A6000F0C457 /* AbstractEntity.m in Sources */,
+				41D487B3160B5A6000F0C457 /* AbstractEntityCollection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +538,7 @@
 				41D95D1F1608A4B50084AD0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

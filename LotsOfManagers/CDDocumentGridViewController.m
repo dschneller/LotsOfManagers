@@ -1,24 +1,27 @@
 //
-//  CDDocumentsTableViewController.m
+//  CDDocumentGridViewController.m
 //  LotsOfManagers
 //
-//  Created by Daniel Schneller on 18.09.12.
+//  Created by Daniel Schneller on 20.09.12.
 //  Copyright (c) 2012 codecentric AG. All rights reserved.
 //
 
-#import "CDDocumentsTableViewController.h"
+#import "CDDocumentGridViewController.h"
+#import "CDDataManager.h"
 #import "CDDocument.h"
+#import "CDDocumentViewModel.h"
+#import "CDDocumentStackCell.h"
 
 #define FETCH_BLOCK_SIZE 50
 #define NUM_BLOCKS 3
 
-@interface CDDocumentsTableViewController ()
 
+@interface CDDocumentGridViewController ()
 @property (nonatomic, readonly, getter = isScrollingFast) BOOL scrollingFast;
 
 @end
 
-@implementation CDDocumentsTableViewController
+@implementation CDDocumentGridViewController
 {
     NSMutableArray* _displayedItems;
     NSUInteger _totalCount;
@@ -32,14 +35,18 @@
     BOOL _scrollingInProgress;
 }
 
-/* Threshold to distinguish "fast" from "slow" scrolling. In pixels per second. */
-static CGFloat const kScrollSpeedThreshold = 4.0f;
-
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _scrollingInProgress = NO;
     _totalCount = 0;
     _currentBlock = 0;
     _cachedRange = NSMakeRange(0, NUM_BLOCKS*FETCH_BLOCK_SIZE);
@@ -49,10 +56,10 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
 {
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(handleDocumentsReceivedNotification:) name:DOCUMENTS_RETRIEVED_NOTIFICATION object:nil];
-
+    
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(handleElementCountReceivedNotification:) name:ELEMENT_COUNT_RETRIEVED_NOTIFICATION object:nil];
-
+    
     
     if (_displayedItems == nil)
     {
@@ -66,19 +73,7 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return YES;
-}
 
 
 #pragma mark - Handle Notifications
@@ -89,7 +84,7 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
     
     _totalCount = [elementCount unsignedIntegerValue];
     _displayedItems = nil;
-    [self.tableView reloadData];
+    [self.gridView reloadData];
 }
 
 - (void) handleDocumentsReceivedNotification:(NSNotification*)notification
@@ -106,24 +101,21 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
         CDDocumentViewModel* viewModel = [[CDDocumentViewModel alloc] init];
         viewModel.documentFileName = doc.filename;
         viewModel.smallThumbImage = [UIImage imageNamed:@"first"];
-    
+        
         [newDisplayedItems addObject:viewModel];
     }
     _cachedRange = NSMakeRange(loc, NUM_BLOCKS*FETCH_BLOCK_SIZE);
     _displayedItems = newDisplayedItems;
     //NSLog(@"New documents arrived for range %d-%d", _cachedRange.location, _cachedRange.location + _cachedRange.length);
-
-    [self refreshVisibleItems:self.tableView];
+    
+    [self refreshVisibleItems:self.gridView];
 }
-
-
-#pragma mark - Scroll Delegate
-
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [self controlBackgroundTasksByScrollingSpeed:scrollView];
     [self retrieveCurrentWindow];
 }
+
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
@@ -136,7 +128,7 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    NSLog(@"Did End Decvelertio");
+    NSLog(@"Did End Decelerating");
     _scrollingInProgress = NO;
     [self refreshVisibleItems:scrollView];
 }
@@ -154,55 +146,56 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
         
         CGFloat scrollSpeed = fabsf(scrollSpeedNotAbs);
         
-        if (scrollSpeed > kScrollSpeedThreshold) {
+        if (scrollSpeed > 4.0f) {
             _scrollingFast = YES;
         } else {
             _scrollingFast = NO;
         }
-        
+        _scrollingInProgress = YES;
         _lastOffset = currentOffset;
         _lastOffsetCapture = currentTime;
     }
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-//    //NSLog(@"didEndDragging");
-    [self refreshVisibleItems:scrollView];
-}
 
 - (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView
 {
-//    //NSLog(@"didScrollToTop");
+    NSLog(@"didScrollToTop");
     [self refreshVisibleItems:scrollView];
 }
 
 - (void)refreshVisibleItems:(UIScrollView*)scrollView
 {
-//    //NSLog(@"refreshVisibleItems");
+    //    //NSLog(@"refreshVisibleItems");
     _scrollingFast = NO;
     [self retrieveCurrentWindow];
-
     if ([scrollView isKindOfClass:[UITableView class]])
     {
         UITableView* tableView = (UITableView*)scrollView;
         [tableView reloadRowsAtIndexPaths:[tableView indexPathsForVisibleRows]
-                          withRowAnimation:UITableViewRowAnimationNone];
+                         withRowAnimation:UITableViewRowAnimationNone];
     }
+    else if ([scrollView isKindOfClass:[AQGridView class]])
+    {
+        AQGridView* gridView = (AQGridView*)scrollView;
+        [gridView reloadItemsAtIndices:gridView.visibleCellIndices withAnimation:AQGridViewItemAnimationNone];
+    }
+    
 }
 
 - (void) retrieveCurrentWindow
 {
     if (!self.scrollingFast)
     {
-        NSArray* indexPaths = [self.tableView indexPathsForVisibleRows];
-        if (indexPaths.count == 0)
+        NSIndexSet* visible = [self.gridView visibleCellIndices];
+        if (visible.count == 0)
         {
             return;
         }
-        NSIndexPath* middle = [indexPaths objectAtIndex:indexPaths.count / 2];
-        
-        NSInteger row = middle.row;
+
+        NSUInteger middle = [visible firstIndex];
+    
+        NSUInteger row = middle;
         NSInteger new_block = row / FETCH_BLOCK_SIZE;
         
         if (abs(new_block - _currentBlock) != 0)
@@ -220,32 +213,49 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
     }
 }
 
-#pragma mark - Table view data source
+#pragma mark - Grid Delegate
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSUInteger) numberOfItemsInGridView:(AQGridView *)gridView
 {
     return _totalCount;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (AQGridViewCell *) dequeueAndConfigureGridCellForGridView:(AQGridView*)gridView
 {
-    
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    CDDocumentViewModel* viewModel;
-    if (self.isScrollingFast)
+    static NSString* docStackCellID = @"CDDocumentStackCell";
+    AQGridViewCell* cell = [gridView dequeueReusableCellWithIdentifier:docStackCellID];
+    if (!cell)
     {
-        cell.textLabel.text = [NSString stringWithFormat:@"%d --- ---", indexPath.row];
+        UINib* nib = [UINib nibWithNibName:@"CDDocumentStackCell" bundle:[NSBundle mainBundle]];
+        NSArray* nibContent = [nib instantiateWithOwner:nil options:nil];
+        
+        UIView* topViewFromXib = [nibContent objectAtIndex:0];
+        
+        cell = [[AQGridViewCell alloc] initWithFrame:topViewFromXib.frame
+                                     reuseIdentifier:docStackCellID];
+        [cell.contentView addSubview:topViewFromXib];
+        cell.contentView.backgroundColor = [UIColor clearColor];
+        cell.backgroundColor = [UIColor clearColor];
+        
+    }
+    return cell;
+}
+
+- (AQGridViewCell *)gridView:(AQGridView *)gridView cellForItemAtIndex:(NSUInteger)index
+{
+    AQGridViewCell* cell = [self dequeueAndConfigureGridCellForGridView:gridView];
+    
+    CDDocumentStackCell* docStackCell;
+    CDDocumentViewModel* viewModel;
+    docStackCell = (CDDocumentStackCell*)[cell.contentView viewWithTag:kCellContentViewTag];
+
+    if (self.isScrollingFast) {
+        docStackCell.placeholder = YES;
     }
     else
     {
-        NSUInteger itemIndex = indexPath.row-_cachedRange.location;
+        NSUInteger itemIndex = index - _cachedRange.location;
         if (itemIndex >= _displayedItems.count)
         {
             viewModel = nil;
@@ -257,28 +267,24 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
         
         if (viewModel == nil)
         {
-            cell.textLabel.text = [NSString stringWithFormat:@"%d ...", indexPath.row];
+            docStackCell.elementName = [NSString stringWithFormat:@"%d ...", index];
         }
         else
         {
-            cell.textLabel.text = [NSString stringWithFormat:@"%d File: %@",indexPath.row, viewModel.documentFileName];
+            docStackCell.elementName = [NSString stringWithFormat:@"%d File: %@", index, viewModel.documentFileName];
+            docStackCell.image = viewModel.smallThumbImage;
         }
     }
+        
+    /* returning the cell as it currently is, as a placeholder */
     return cell;
 }
 
 
-#pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-       *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    return YES;
 }
 
 @end

@@ -14,5 +14,6 @@
 - (void) retrieveDocumentsInRange:(NSRange)range
                         forTaskId:(NSString*)taskId;
 - (void) retrieveElementCountForTaskId:(NSString*)taskId;
+- (void) cancelTaskIdWithPrefix:(NSString*)taskIdPrefix;
 
 @end

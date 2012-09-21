@@ -15,7 +15,8 @@
     NSArray* _queryResultAllDocuments;
     NSArray* _queryResultInboxOnly;
     
-    NSMutableArray* _queuedTasks;
+    NSMutableDictionary* _queuedTasks;
+    NSOperationQueue* _dataRetrievelAsyncOperationQueue;
 }
 
 + (id) instance
@@ -33,7 +34,10 @@
 {
     if (self = [super init])
     {
-        _queuedTasks = [NSMutableArray arrayWithCapacity:10];
+        _dataRetrievelAsyncOperationQueue = [[NSOperationQueue alloc] init];
+        _dataRetrievelAsyncOperationQueue.maxConcurrentOperationCount = 1;
+        
+        _queuedTasks = [NSMutableDictionary dictionaryWithCapacity:10];
         
         NSMutableArray* preparedAllDocs = [NSMutableArray arrayWithCapacity:1000];
         NSMutableArray* preparedInboxDocs = [NSMutableArray arrayWithCapacity:200];
@@ -57,21 +61,51 @@
     return self;
 }
 
+- (void) cancelTaskIdWithPrefix:(NSString*)prefix
+{
+    NSLog(@"Cancelling tasks with prefix %@", prefix);
+        @synchronized(_queuedTasks)
+        {
+            int oldLength = _queuedTasks.count;
+            for (NSString* taskId in _queuedTasks.keyEnumerator)
+            {
+                if ([taskId hasPrefix:prefix])
+                {
+                    NSOperation* op = [_queuedTasks objectForKey:taskId];
+                    [op cancel];
+                    [_queuedTasks removeObjectForKey:taskId];
+                }
+            }
+            int newLength = _queuedTasks.count;
+            NSLog(@"Removed %d tasks", oldLength - newLength);
+        }
+    
+}
+
+
 - (void) retrieveElementCountForTaskId:(NSString*)taskId
 {
-    @synchronized(_queuedTasks)
-    {
-        if ([_queuedTasks containsObject:taskId])
+        @synchronized(_queuedTasks)
         {
-            NSLog(@"Discarding task with id %@, because one is already queued", taskId);
-            return;
+            if ([_queuedTasks objectForKey:taskId])
+            {
+                NSLog(@"Ignoring task with id %@, because one is already queued", taskId);
+                return;
+            }
+            
+            NSBlockOperation* op = [[NSBlockOperation alloc] init];
+            [op addExecutionBlock:^{
+                NSLog(@">>> Count for taskId %@", taskId);
+                [NSThread sleepForTimeInterval:0.8f];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self sendOutCountNotifications:taskId];
+                });
+                [_queuedTasks removeObjectForKey:taskId];
+                NSLog(@"<<< Count for taskId %@", taskId);
+            }];
+            [_queuedTasks setObject:op forKey:taskId];
+            [_dataRetrievelAsyncOperationQueue addOperation:op];
         }
-        
-        [_queuedTasks addObject:taskId];
-    }
-    
-    
-    [self performSelector:@selector(sendOutCountNotifications:) withObject:taskId afterDelay:0.5f];
 }
 
 - (void) sendOutCountNotifications:(NSString*)taskId
@@ -90,27 +124,33 @@
                                                             object:[NSNumber numberWithUnsignedInteger:_queryResultInboxOnly.count]
                                                           userInfo:userInfo];
     }
-    [_queuedTasks removeObject:taskId];
 
 }
   
 - (void) retrieveDocumentsInRange:(NSRange)range forTaskId:(NSString*)taskId
 {
-    @synchronized(_queuedTasks)
-    {
-        if ([_queuedTasks containsObject:taskId])
+        @synchronized(_queuedTasks)
         {
-            NSLog(@"Discarding task with id %@, because one is already queued", taskId);
-            return;
+            if ([_queuedTasks objectForKey:taskId])
+            {
+                NSLog(@"Discarding task with id %@, because one is already queued", taskId);
+                return;
+            }
+            
+            NSLog(@"Requesting data for range %d - %d", range.location, range.location + range.length);
+            NSBlockOperation* op = [[NSBlockOperation alloc] init];
+            [op addExecutionBlock:^{
+                NSLog(@">>> Retrieve for taskId %@", taskId);
+                [NSThread sleepForTimeInterval:1.5f];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self sendOutDocumentNotifications:range forTaskId:taskId];
+                });
+                [_queuedTasks removeObjectForKey:taskId];
+                NSLog(@"<<< Retrieve for taskId %@", taskId);
+            }];
+            [_queuedTasks setObject:op forKey:taskId];
+            [_dataRetrievelAsyncOperationQueue addOperation:op];
         }
-        
-        [_queuedTasks addObject:taskId];
-    }
-    
-    [self performBlock:^{
-        [self sendOutDocumentNotifications:range forTaskId:taskId];
-    } afterDelay:2.5f];
-    
 }
 
 - (void) sendOutDocumentNotifications:(NSRange)range forTaskId:(NSString*) taskId
@@ -134,7 +174,6 @@
                                                           userInfo:userInfo];
     }
     
-    [_queuedTasks removeObject:taskId];
 }
 
 @end
