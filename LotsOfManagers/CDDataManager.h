@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CDTask.h"
+#import "CDTaskManager.h"
 
 @interface CDDataManager : NSObject
 
 + (id) instance;
-- (void) retrieveDocumentsInRange:(NSRange)range
-                        forTaskId:(NSString*)taskId;
-- (void) retrieveElementCountForTaskId:(NSString*)taskId;
-- (void) cancelTaskIdWithPrefix:(NSString*)taskIdPrefix;
+- (CDTask*)retrieveDocumentsInRange:(NSRange)range;
+- (CDTask*)retrieveElementCount;
+- (void)cancelTask:(CDTask*)task;
 
 @end

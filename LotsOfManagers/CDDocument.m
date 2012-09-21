@@ -10,5 +10,8 @@
 
 @implementation CDDocument
 
+-(NSString *)description {
+	return _documentId;
+}
 
 @end

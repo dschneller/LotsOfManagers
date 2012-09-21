@@ -15,7 +15,6 @@
 @interface CDDocumentsTableViewController ()
 
 @property (nonatomic, readonly, getter = isScrollingFast) BOOL scrollingFast;
-
 @end
 
 @implementation CDDocumentsTableViewController
@@ -25,6 +24,10 @@
     NSRange _cachedRange;
     
     NSInteger _currentBlock;
+    NSMutableArray* _selectedRows;
+    
+    CDTask* _countTask;
+    CDTask* _metadataTask;
     
     // used to determine scrolling speed
     NSTimeInterval _lastOffsetCapture;
@@ -43,21 +46,28 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
     _totalCount = 0;
     _currentBlock = 0;
     _cachedRange = NSMakeRange(0, NUM_BLOCKS*FETCH_BLOCK_SIZE);
+    _selectedRows = [NSMutableArray array];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(handleDocumentsReceivedNotification:) name:DOCUMENTS_RETRIEVED_NOTIFICATION object:nil];
+     addObserver:self
+     selector:@selector(handleDocumentsReceivedNotification:)
+     name:DOCUMENTS_RETRIEVED_NOTIFICATION
+     object:nil];
 
     [[NSNotificationCenter defaultCenter]
-     addObserver:self selector:@selector(handleElementCountReceivedNotification:) name:ELEMENT_COUNT_RETRIEVED_NOTIFICATION object:nil];
+     addObserver:self
+     selector:@selector(handleElementCountReceivedNotification:)
+     name:ELEMENT_COUNT_RETRIEVED_NOTIFICATION
+     object:nil];
 
     
     if (_displayedItems == nil)
     {
-        [[CDDataManager instance] retrieveElementCountForTaskId:@"count.all"];
-        [[CDDataManager instance] retrieveDocumentsInRange:_cachedRange forTaskId:@"docs.all_0"];
+		_countTask = [[CDDataManager instance] retrieveElementCount];
+		_metadataTask = [[CDDataManager instance] retrieveDocumentsInRange:_cachedRange];
     }
 }
 
@@ -66,14 +76,6 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -84,8 +86,8 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
 #pragma mark - Handle Notifications
 - (void) handleElementCountReceivedNotification:(NSNotification*)notification
 {
+	NSLog(@"task count returns results : %@", notification.object);
     NSNumber* elementCount = notification.object;
-    NSDictionary* userInfo = notification.userInfo;
     
     _totalCount = [elementCount unsignedIntegerValue];
     _displayedItems = nil;
@@ -94,9 +96,10 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
 
 - (void) handleDocumentsReceivedNotification:(NSNotification*)notification
 {
-    NSArray* documents = notification.object;
-    NSDictionary* userInfo = notification.userInfo;
-    NSNumber *n_loc = [userInfo valueForKey:@"range"];
+	NSMutableDictionary *result = notification.object;
+	NSArray *documents = [result valueForKey:@"documents"];
+	NSLog(@"task documents %@ returns results", [result valueForKey:@"taskId"]);
+	NSNumber *n_loc = [result valueForKey:@"range"];
     NSUInteger loc = [n_loc unsignedIntegerValue];
     
     NSMutableArray* newDisplayedItems = [NSMutableArray arrayWithCapacity:documents.count];
@@ -111,8 +114,6 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
     }
     _cachedRange = NSMakeRange(loc, NUM_BLOCKS*FETCH_BLOCK_SIZE);
     _displayedItems = newDisplayedItems;
-    //NSLog(@"New documents arrived for range %d-%d", _cachedRange.location, _cachedRange.location + _cachedRange.length);
-
     [self refreshVisibleItems:self.tableView];
 }
 
@@ -214,8 +215,8 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
             //NSLog(@"New Block: %d (%d - %d)", new_block, new_location, new_location + NUM_BLOCKS*FETCH_BLOCK_SIZE);
             
             // order data manager to fetch documents in given range
-            [[CDDataManager instance] cancelTaskIdWithPrefix:@"docs.all_"];
-            [[CDDataManager instance] retrieveDocumentsInRange:new_range forTaskId:[NSString stringWithFormat:@"docs.all_%d", new_range.location]];
+            [[CDDataManager instance] cancelTask:_metadataTask];
+            _metadataTask = [[CDDataManager instance] retrieveDocumentsInRange:new_range];
         }
     }
 }
@@ -237,7 +238,7 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
     
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
+
     CDDocumentViewModel* viewModel;
     if (self.isScrollingFast)
     {
@@ -267,18 +268,29 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if([_selectedRows containsObject:[NSNumber numberWithInteger:indexPath.row]]) {
+        cell.selected = YES;
+        [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }else{
+        cell.selected = NO;
+    }
+    
+}
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-       *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    NSNumber* row = [NSNumber numberWithInteger:indexPath.row];
+    [_selectedRows addObject:row];
 }
+
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [_selectedRows removeObject:[NSNumber numberWithInteger:indexPath.row]];
+}
+
 
 @end

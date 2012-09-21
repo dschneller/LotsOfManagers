@@ -29,6 +29,10 @@
     
     NSInteger _currentBlock;
     
+    CDTask* _countTask;
+    CDTask* _metadataTask;
+
+    
     // used to determine scrolling speed
     NSTimeInterval _lastOffsetCapture;
     CGPoint _lastOffset;
@@ -63,8 +67,8 @@
     
     if (_displayedItems == nil)
     {
-        [[CDDataManager instance] retrieveElementCountForTaskId:@"count.all"];
-        [[CDDataManager instance] retrieveDocumentsInRange:_cachedRange forTaskId:@"docs.all_0"];
+        _countTask = [[CDDataManager instance] retrieveElementCount];
+        _metadataTask = [[CDDataManager instance] retrieveDocumentsInRange:_cachedRange];
     }
 }
 
@@ -89,9 +93,10 @@
 
 - (void) handleDocumentsReceivedNotification:(NSNotification*)notification
 {
-    NSArray* documents = notification.object;
-    NSDictionary* userInfo = notification.userInfo;
-    NSNumber *n_loc = [userInfo valueForKey:@"range"];
+	NSMutableDictionary *result = notification.object;
+	NSArray *documents = [result valueForKey:@"documents"];
+	NSLog(@"task documents %@ returns results", [result valueForKey:@"taskId"]);
+	NSNumber *n_loc = [result valueForKey:@"range"];
     NSUInteger loc = [n_loc unsignedIntegerValue];
     
     NSMutableArray* newDisplayedItems = [NSMutableArray arrayWithCapacity:documents.count];
@@ -207,8 +212,8 @@
             //NSLog(@"New Block: %d (%d - %d)", new_block, new_location, new_location + NUM_BLOCKS*FETCH_BLOCK_SIZE);
             
             // order data manager to fetch documents in given range
-            [[CDDataManager instance] cancelTaskIdWithPrefix:@"docs.all_"];
-            [[CDDataManager instance] retrieveDocumentsInRange:new_range forTaskId:[NSString stringWithFormat:@"docs.all_%d", new_range.location]];
+            [[CDDataManager instance] cancelTask:_metadataTask];
+            _metadataTask = [[CDDataManager instance] retrieveDocumentsInRange:new_range];
         }
     }
 }

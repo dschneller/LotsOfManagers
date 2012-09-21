@@ -58,6 +58,15 @@
 		41D95D2B1608A74D0084AD0D /* CDDocumentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D95D2A1608A74D0084AD0D /* CDDocumentViewModel.m */; };
 		41D95D2E1608A9A30084AD0D /* CDDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D95D2D1608A9A30084AD0D /* CDDocument.m */; };
 		41D95D311608BB950084AD0D /* NSObject+PerformBlockAfterDelay.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D95D301608BB950084AD0D /* NSObject+PerformBlockAfterDelay.m */; };
+		F08936F1160B658000D5DFE4 /* CDDataRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F08936F0160B658000D5DFE4 /* CDDataRepository.m */; };
+		7F22FA10160B1B48009E3C16 /* CDTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F22FA0F160B1B48009E3C16 /* CDTaskManager.m */; };
+		7F22FA13160B1B5F009E3C16 /* CDTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F22FA12160B1B5F009E3C16 /* CDTask.m */; };
+		7F22FA16160B1FF4009E3C16 /* CDDocumentsMetadataTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F22FA15160B1FF4009E3C16 /* CDDocumentsMetadataTask.m */; };
+		7F22FA1B160B216B009E3C16 /* CDDocumentMetadataCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F22FA1A160B216B009E3C16 /* CDDocumentMetadataCommand.m */; };
+		7F22FA1F160B2182009E3C16 /* CDCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F22FA1E160B2182009E3C16 /* CDCommand.m */; };
+		7F22FA2F160B4CF3009E3C16 /* CDDocumentsCountTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F22FA2E160B4CF3009E3C16 /* CDDocumentsCountTask.m */; };
+		7F22FA33160B4DD1009E3C16 /* CDTaskBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F22FA32160B4DD1009E3C16 /* CDTaskBuilder.m */; };
+		7F22FA37160B513C009E3C16 /* CDDocumentsCountCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F22FA36160B513C009E3C16 /* CDDocumentsCountCommand.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -143,6 +152,24 @@
 		41D95D2D1608A9A30084AD0D /* CDDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDocument.m; sourceTree = "<group>"; };
 		41D95D2F1608BB950084AD0D /* NSObject+PerformBlockAfterDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PerformBlockAfterDelay.h"; sourceTree = "<group>"; };
 		41D95D301608BB950084AD0D /* NSObject+PerformBlockAfterDelay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PerformBlockAfterDelay.m"; sourceTree = "<group>"; };
+		F08936EF160B658000D5DFE4 /* CDDataRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDataRepository.h; sourceTree = "<group>"; };
+		F08936F0160B658000D5DFE4 /* CDDataRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDataRepository.m; sourceTree = "<group>"; };
+		7F22FA0E160B1B48009E3C16 /* CDTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDTaskManager.h; sourceTree = "<group>"; };
+		7F22FA0F160B1B48009E3C16 /* CDTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDTaskManager.m; sourceTree = "<group>"; };
+		7F22FA11160B1B5F009E3C16 /* CDTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDTask.h; sourceTree = "<group>"; };
+		7F22FA12160B1B5F009E3C16 /* CDTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDTask.m; sourceTree = "<group>"; };
+		7F22FA14160B1FF4009E3C16 /* CDDocumentsMetadataTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDocumentsMetadataTask.h; sourceTree = "<group>"; };
+		7F22FA15160B1FF4009E3C16 /* CDDocumentsMetadataTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDocumentsMetadataTask.m; sourceTree = "<group>"; };
+		7F22FA19160B216B009E3C16 /* CDDocumentMetadataCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDocumentMetadataCommand.h; sourceTree = "<group>"; };
+		7F22FA1A160B216B009E3C16 /* CDDocumentMetadataCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDocumentMetadataCommand.m; sourceTree = "<group>"; };
+		7F22FA1D160B2182009E3C16 /* CDCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDCommand.h; sourceTree = "<group>"; };
+		7F22FA1E160B2182009E3C16 /* CDCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDCommand.m; sourceTree = "<group>"; };
+		7F22FA2D160B4CF3009E3C16 /* CDDocumentsCountTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDocumentsCountTask.h; sourceTree = "<group>"; };
+		7F22FA2E160B4CF3009E3C16 /* CDDocumentsCountTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDocumentsCountTask.m; sourceTree = "<group>"; };
+		7F22FA31160B4DD1009E3C16 /* CDTaskBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDTaskBuilder.h; sourceTree = "<group>"; };
+		7F22FA32160B4DD1009E3C16 /* CDTaskBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDTaskBuilder.m; sourceTree = "<group>"; };
+		7F22FA35160B513C009E3C16 /* CDDocumentsCountCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDocumentsCountCommand.h; sourceTree = "<group>"; };
+		7F22FA36160B513C009E3C16 /* CDDocumentsCountCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDocumentsCountCommand.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +280,9 @@
 			isa = PBXGroup;
 			children = (
 				41D48777160B579A00F0C457 /* Grid */,
+				F08936ED160B655000D5DFE4 /* DataRepository */,
+				7F22FA17160B212A009E3C16 /* Commands */,
+				7F22FA0A160B1A41009E3C16 /* Tasks */,
 				41D95D251608A61E0084AD0D /* Documents Table */,
 				41D95D201608A52C0084AD0D /* DataManager */,
 				41D95D211608A53D0084AD0D /* Default Stuff */,
@@ -310,6 +340,95 @@
 				41D95D2A1608A74D0084AD0D /* CDDocumentViewModel.m */,
 			);
 			name = "Documents Table";
+			sourceTree = "<group>";
+		};
+		F08936ED160B655000D5DFE4 /* DataRepository */ = {
+			isa = PBXGroup;
+			children = (
+				F08936EF160B658000D5DFE4 /* CDDataRepository.h */,
+				F08936F0160B658000D5DFE4 /* CDDataRepository.m */,
+			);
+			name = DataRepository;
+			sourceTree = "<group>";
+		};
+
+		
+		7F22FA0A160B1A41009E3C16 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				7F22FA30160B4DB1009E3C16 /* TaskBuilder */,
+				7F22FA0D160B1A5A009E3C16 /* Task */,
+				7F22FA0C160B1A50009E3C16 /* TaskManager */,
+			);
+			name = Tasks;
+			sourceTree = "<group>";
+		};
+		7F22FA0C160B1A50009E3C16 /* TaskManager */ = {
+			isa = PBXGroup;
+			children = (
+				7F22FA0E160B1B48009E3C16 /* CDTaskManager.h */,
+				7F22FA0F160B1B48009E3C16 /* CDTaskManager.m */,
+			);
+			name = TaskManager;
+			sourceTree = "<group>";
+		};
+		7F22FA0D160B1A5A009E3C16 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				7F22FA11160B1B5F009E3C16 /* CDTask.h */,
+				7F22FA12160B1B5F009E3C16 /* CDTask.m */,
+				7F22FA14160B1FF4009E3C16 /* CDDocumentsMetadataTask.h */,
+				7F22FA15160B1FF4009E3C16 /* CDDocumentsMetadataTask.m */,
+				7F22FA2D160B4CF3009E3C16 /* CDDocumentsCountTask.h */,
+				7F22FA2E160B4CF3009E3C16 /* CDDocumentsCountTask.m */,
+			);
+			name = Task;
+			sourceTree = "<group>";
+		};
+		7F22FA17160B212A009E3C16 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				7F22FA34160B5116009E3C16 /* DocumentsCountCommand */,
+				7F22FA1C160B2173009E3C16 /* Root */,
+				7F22FA18160B2135009E3C16 /* DocumentMetadataCommand */,
+			);
+			name = Commands;
+			sourceTree = "<group>";
+		};
+		7F22FA18160B2135009E3C16 /* DocumentMetadataCommand */ = {
+			isa = PBXGroup;
+			children = (
+				7F22FA19160B216B009E3C16 /* CDDocumentMetadataCommand.h */,
+				7F22FA1A160B216B009E3C16 /* CDDocumentMetadataCommand.m */,
+			);
+			name = DocumentMetadataCommand;
+			sourceTree = "<group>";
+		};
+		7F22FA1C160B2173009E3C16 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				7F22FA1D160B2182009E3C16 /* CDCommand.h */,
+				7F22FA1E160B2182009E3C16 /* CDCommand.m */,
+			);
+			name = Root;
+			sourceTree = "<group>";
+		};
+		7F22FA30160B4DB1009E3C16 /* TaskBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				7F22FA31160B4DD1009E3C16 /* CDTaskBuilder.h */,
+				7F22FA32160B4DD1009E3C16 /* CDTaskBuilder.m */,
+			);
+			name = TaskBuilder;
+			sourceTree = "<group>";
+		};
+		7F22FA34160B5116009E3C16 /* DocumentsCountCommand */ = {
+			isa = PBXGroup;
+			children = (
+				7F22FA35160B513C009E3C16 /* CDDocumentsCountCommand.h */,
+				7F22FA36160B513C009E3C16 /* CDDocumentsCountCommand.m */,
+			);
+			name = DocumentsCountCommand;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -421,6 +540,15 @@
 				41D487AD160B585100F0C457 /* CDDocumentGridViewController.m in Sources */,
 				41D487B2160B5A6000F0C457 /* AbstractEntity.m in Sources */,
 				41D487B3160B5A6000F0C457 /* AbstractEntityCollection.m in Sources */,
+				F08936F1160B658000D5DFE4 /* CDDataRepository.m in Sources */,
+				7F22FA10160B1B48009E3C16 /* CDTaskManager.m in Sources */,
+				7F22FA13160B1B5F009E3C16 /* CDTask.m in Sources */,
+				7F22FA16160B1FF4009E3C16 /* CDDocumentsMetadataTask.m in Sources */,
+				7F22FA1B160B216B009E3C16 /* CDDocumentMetadataCommand.m in Sources */,
+				7F22FA1F160B2182009E3C16 /* CDCommand.m in Sources */,
+				7F22FA2F160B4CF3009E3C16 /* CDDocumentsCountTask.m in Sources */,
+				7F22FA33160B4DD1009E3C16 /* CDTaskBuilder.m in Sources */,
+				7F22FA37160B513C009E3C16 /* CDDocumentsCountCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
