@@ -11,7 +11,7 @@
 
 @class CDCommand;
 
-@interface CDDocumentsMetadataTask : CDTask <CDCommandResult>
+@interface CDDocumentsMetadataTask : CDTask
 
 @property(nonatomic, assign) NSUInteger row;
 @property(nonatomic, assign) NSUInteger offset;

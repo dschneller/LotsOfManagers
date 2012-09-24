@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "CDTask.h"
+#import "CDCommand.h"
 
-@interface CDTaskManager : NSObject <CDTaskDelegate>
+@interface CDTaskManager : NSObject <CDTaskDelegate, CDCommandResult>
 
 @property(nonatomic, strong, readonly) NSMutableDictionary *allLightTasks;
 

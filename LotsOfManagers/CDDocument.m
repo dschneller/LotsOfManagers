@@ -11,7 +11,7 @@
 @implementation CDDocument
 
 -(NSString *)description {
-	return _documentId;
+	return  [NSString stringWithFormat:@"[cddocument id: %@; filename : %@; author : %@;]", _documentId, _filename, _author];
 }
 
 @end
