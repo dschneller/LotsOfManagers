@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "NSObject+PerformBlockAfterDelay.h"
+#import <RestKit/Restkit.h>
 
 @class CDCommand;
 
