@@ -7,16 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CDCommandResult.h"
 
-@class CDTask;
+@protocol CDTaskDelegate;
 
-@protocol CDTaskDelegate <NSObject>
 
--(void)cdTaskDidFinish:(CDTask*)task;
-
-@end
-
-@interface CDTask : NSObject <NSCopying>
+@interface CDTask : NSObject <NSCopying, CDCommandResult>
 
 @property (nonatomic, copy) NSString *taskId;
 @property (nonatomic, copy) NSString *taskFamily;
@@ -26,5 +22,11 @@
 
 -(void)execute;
 -(void)cancel;
+
+@end
+
+@protocol CDTaskDelegate <NSObject>
+
+-(void)cdTaskDidFinish:(CDTask*)task;
 
 @end

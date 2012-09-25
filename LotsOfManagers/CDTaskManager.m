@@ -10,13 +10,13 @@
 
 @interface CDTaskManager ()
 
-@property(nonatomic, strong) NSMutableDictionary *operationForTasksPerFamily;
+@property(nonatomic, strong) NSMutableDictionary *family2task2operation;
 
 @end
 
 @implementation CDTaskManager
 {
-    NSMutableDictionary* _operationQueuesPerFamily;
+    NSMutableDictionary* _family2operationqueue;
 }
 
 
@@ -34,8 +34,8 @@
 {
     if (self = [super init])
     {
-		_operationForTasksPerFamily = [NSMutableDictionary dictionary];
-        _operationQueuesPerFamily = [NSMutableDictionary dictionary];
+		_family2task2operation    = [NSMutableDictionary dictionary];
+        _family2operationqueue    = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -43,27 +43,27 @@
 
 -(void)addTask:(CDTask *)task {
     NSOperationQueue* familyQueue;
-    @synchronized(_operationQueuesPerFamily)
+    @synchronized(_family2operationqueue)
     {
-        familyQueue = _operationQueuesPerFamily[task.taskFamily];
+        familyQueue = _family2operationqueue[task.taskFamily];
         if (!familyQueue)
         {
             NSLog(@"Initially creating new OperationQueue for task family %@", task.taskFamily);
             familyQueue = [[NSOperationQueue alloc] init];
             familyQueue.maxConcurrentOperationCount = 1;
-            _operationQueuesPerFamily[task.taskFamily] = familyQueue;
+            _family2operationqueue[task.taskFamily] = familyQueue;
         }
     }
     
-	@synchronized(_operationForTasksPerFamily)
+	@synchronized(_family2task2operation)
     {
-        NSMutableDictionary* operationsPerTask = _operationForTasksPerFamily[task.taskFamily];
-        if (! operationsPerTask)
+        NSMutableDictionary* task2op = _family2task2operation[task.taskFamily];
+        if (! task2op)
         {
-            operationsPerTask = [NSMutableDictionary dictionary];
+            task2op = [NSMutableDictionary dictionary];
         }
         
-        if (operationsPerTask[task])
+        if (task2op[task])
         {
             NSLog(@"Discarding task with id %@, because one is already queued", task.taskId);
             return;
@@ -75,22 +75,18 @@
             NSLog(@"task executing : %@", task.taskId);
             [task execute];
         }];
-        operationsPerTask[task] = operation;
+        task2op[task] = operation;
         [familyQueue addOperation:operation];
     }
 }
 
 -(void)cancelTask:(CDTask*)task
 {
-    NSMutableDictionary* operationsPerTask = _operationQueuesPerFamily[task.taskFamily];
-    if (! operationsPerTask)
+	@synchronized(_family2task2operation)
     {
-        NSLog(@"Cannot cancel task id %@, because there is no operation known for it", task.taskId);
-    }
-
-	@synchronized(operationsPerTask)
-    {
-        NSOperation* op = operationsPerTask[task];
+        NSDictionary* task2operation = _family2task2operation[task.taskFamily];
+        NSOperation* op = task2operation[task];
+        
         if (!op)
         {
             NSLog(@"Cannot cancel task id %@, because there is no operation known for it", task.taskId);
@@ -112,23 +108,35 @@
 
 
 -(void)removeTask:(CDTask*)task {
-    NSMutableDictionary* operationsPerTask = _operationForTasksPerFamily[task.taskFamily];
-    if (! operationsPerTask)
+    NSMutableDictionary* task2op = _family2task2operation[task.taskFamily];
+    if (! task2op)
     {
         NSLog(@"Cannot cancel task id %@, because there is no operation known for it", task.taskId);
     }
 
-    @synchronized(operationsPerTask)
+    @synchronized(task2op)
     {
-        NSOperation* op = operationsPerTask[task];
+        NSOperation* op = task2op[task];
         if (op)
         {
             [op cancel];
-            [operationsPerTask removeObjectForKey:task];
+            [task2op removeObjectForKey:task];
             NSLog(@"task removed from queue : %@", task.taskId);
         }
     }
 }
 
+
+#pragma mark -
+#pragma mark CommandResultDelegate
+
+- (void) processCommandResult:(CDCommand *)command result:(id)result message:(NSString *)message {
+	if (command.originatingTask.isCancelRequested) {
+		//nothing to do
+		NSLog(@"Command from taskId :%@ is ignored", command.originatingTask.taskId);
+	}else {
+		[command.originatingTask processCommandResult:command result:result message:message];
+	}
+}
 
 @end

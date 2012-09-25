@@ -13,6 +13,22 @@
 int main(int argc, char *argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([CDAppDelegate class]));
+        int retVal = 0;
+        
+        @try {
+            retVal = UIApplicationMain(argc, argv, nil, NSStringFromClass([CDAppDelegate class]));
+        }
+        @catch (NSException *exception) {
+            NSArray *backtrace = [exception callStackSymbols];
+            NSString *version = [[UIDevice currentDevice] systemVersion];
+            NSString *message = [NSString stringWithFormat:@"OS: %@. Backtrace:\n%@",
+                                 version,
+                                 backtrace];
+            NSLog(@"Exception - %@",[exception description]);
+            NSLog(@"%@", message);
+            exit(EXIT_FAILURE);
+        }
+        return retVal;
     }
+
 }
