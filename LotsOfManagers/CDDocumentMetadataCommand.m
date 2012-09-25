@@ -9,6 +9,7 @@
 #import "CDDocumentMetadataCommand.h"
 #import "CDDataRepository.h"
 #import "CDDocument.h"
+#import "CDDocumentSearchResult.h"
 
 @implementation CDDocumentMetadataCommand
 
@@ -28,8 +29,14 @@
 						  resourcePath:kWSPathDocuments
 					   queryParameters:queryParams];
 	
-	[_objectManager loadObjectsAtResourcePath:[NSString stringWithFormat:@"%@?%@", url.resourcePath, url.query]
-									 delegate:self];
+
+	NSString* resourcePath = [NSString stringWithFormat:@"%@?%@", url.resourcePath, url.query];
+	[_objectManager loadObjectsAtResourcePath:resourcePath
+								   usingBlock:^(RKObjectLoader *loader) {
+									   loader.delegate = self;
+									   loader.objectMapping = [[CDCommand sharedObjectManagerInstance].mappingProvider objectMappingForClass:[CDDocumentSearchResult class]];
+									   loader.targetObject = [[CDDocumentSearchResult alloc] init];
+								   }];
 }
 
 -(void)cancel {
@@ -48,45 +55,26 @@
 		NSLog(@"Response is not successful : %@", response.bodyAsString);
 	}
 }
-	
-#pragma mark -
-#pragma mark -
-	
-	
--(void)objectLoader:(RKObjectLoader *)objectLoader didLoadObjects:(NSArray *)objects
+
+- (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObject:(id)object
 {
-//	NSLog(@"objects : %@", objects);
-//	for (CDDocument *doc in objects) {
-//		NSLog(@"doc id : %@", doc);
-//	}
-	[self didFinishWithResult:objects];
+	CDDocumentSearchResult* searchResult = (CDDocumentSearchResult*)object;
+	NSDictionary *result = @{
+	@"range" : @(self.range.location),
+	@"hits"  : searchResult.hits,
+	@"documents" : searchResult.documents
+	};
+	
+	self.finished = YES;
+	[self.delegate processCommandResult:self result:result message:@""];
 }
+	
+
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error{
 	[super objectLoader:objectLoader didFailWithError:error];
 	NSLog(@"Object loader failed to load the collection due to an error: %@ userInfo: %@", error, [error userInfo]);
 }
-
--(void)didFinishWithResult:(id)result {
-	self.finished = YES;
-	NSMutableDictionary *documents = [[NSMutableDictionary alloc] init];
-    [documents setValue:[NSNumber numberWithInteger:self.range.location] forKey:@"range"];
-	[documents setValue:result forKey:@"documents"];
-	[self.delegate processCommandResult:self result:documents message:@""];
-}
-
-
--(void)callDataRepository {
-    [NSThread sleepForTimeInterval:2.5f];
-	NSRange offset = self.range;
-	if(self.range.location + self.range.length > [[CDDataRepository instance].documents count]) {
-		NSUInteger length = [[CDDataRepository instance].documents count] - self.range.location;
-		 offset = NSMakeRange(self.range.location, length);
-	}
-	self.range = offset;
-	[self didFinishWithResult:[[CDDataRepository instance].documents subarrayWithRange:offset]];
-}
-
 
 
 @end

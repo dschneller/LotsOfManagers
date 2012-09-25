@@ -8,9 +8,8 @@
 
 #import "CDCommand.h"
 #import "CDConfiguration.h"
-#import "CDDocumentsCount.h"
 #import "CDDocument.h"
-
+#import "CDDocumentSearchResult.h"
 #define ACCESS_TOKEN_HARD_CODED @"8e962e00-f7ec-488c-b924-ed04ed4ae242"
 
 @implementation CDCommand
@@ -38,7 +37,7 @@
 		dispatch_once(&onceToken, ^{
 #if DEBUG
 		//				RKLogConfigureByName("RestKit/Network", RKLogLevelDebug);
-		//	            RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelDebug);
+			            RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelDebug);
 #endif
 			__sharedInstance = [RKObjectManager managerWithBaseURLString:[CDConfiguration sharedConfig].webServiceURL];
 			__sharedInstance.client.cachePolicy = RKRequestCachePolicyNone;
@@ -48,8 +47,8 @@
 			__sharedInstance.client.authenticationType = RKRequestAuthenticationTypeOAuth2;
 	#warning get the real access token and set it as define value
 			__sharedInstance.client.OAuth2AccessToken = ACCESS_TOKEN_HARD_CODED;
-			[self setDocumentsCountMappping];
-			[self setDocumentMetadataMapping];
+
+			[__sharedInstance.mappingProvider addObjectMapping:[self cdDocumentSearchResultMapping]];
 		});
 		}
 	}
@@ -76,35 +75,24 @@
 }
 
 
+
 #pragma mark - 
 #pragma mark Mapping Rest to Model
 
-+(void)setDocumentsCountMappping {
-	[[self sharedObjectManagerInstance].mappingProvider addObjectMapping:[self cdDocumentsCountMapping]];
++(RKObjectMapping *)cdDocumentMapping
+{
+	RKObjectMapping *cdDocumentMapping = [RKObjectMapping mappingForClass:[CDDocument class]];
+	[cdDocumentMapping mapKeyPath:@"filename"     toAttribute:@"filename"];
+	[cdDocumentMapping mapKeyPath:@"id"			  toAttribute:@"documentId"];
+    [cdDocumentMapping mapKeyPath:@"author"       toAttribute:@"author"];
+	return cdDocumentMapping;
 }
 
-+(void)setDocumentMetadataMapping {
-	//[[self sharedObjectManagerInstance].mappingProvider addObjectMapping:[self cdDocumentMetadataMapping]];
-	[[self sharedObjectManagerInstance].mappingProvider setMapping:[self cdDocumentMetadataMapping] forKeyPath:@"documents"];
-	[[self sharedObjectManagerInstance].mappingProvider setMapping:[self cdDocumentsCountMapping] forKeyPath:@"hits"];
-
-}
-
-
-+(RKObjectMapping *)cdDocumentsCountMapping {
-	RKObjectMapping *cdDocumentsCountMapping = [RKObjectMapping mappingForClass:[CDDocumentsCount class]];
-	[cdDocumentsCountMapping mapKeyPath:kWSDocumentsCount   toAttribute:kDocumentsCount];
-	[cdDocumentsCountMapping mapKeyPath:kWSDocuments toAttribute:kWSDocuments];
-	return cdDocumentsCountMapping;
-}
-
-
-+(RKObjectMapping *)cdDocumentMetadataMapping {
-	RKObjectMapping *cdDocumentMetadataMapping = [RKObjectMapping mappingForClass:[CDDocument class]];
-	[cdDocumentMetadataMapping mapKeyPath:@"filename"     toAttribute:@"filename"];
-	[cdDocumentMetadataMapping mapKeyPath:@"id"			  toAttribute:@"documentId"];
-    [cdDocumentMetadataMapping mapKeyPath:@"author"       toAttribute:@"author"];
-	return cdDocumentMetadataMapping;
++(RKObjectMapping *)cdDocumentSearchResultMapping {
+	RKObjectMapping *cdDocumentSearchResultMapping = [RKObjectMapping mappingForClass:[CDDocumentSearchResult class]];
+	[cdDocumentSearchResultMapping mapKeyPath:@"hits" toAttribute:@"hits"];
+	[cdDocumentSearchResultMapping mapKeyPath:@"documents" toRelationship:@"documents" withMapping:[self cdDocumentMapping]];
+	return cdDocumentSearchResultMapping;
 }
 
 

@@ -8,7 +8,7 @@
 
 #import "CDDocumentsCountCommand.h"
 #import "CDDataRepository.h"
-#import "CDDocumentsCount.h"
+#import "CDDocumentSearchResult.h"
 
 @implementation CDDocumentsCountCommand
 
@@ -17,20 +17,19 @@
 	[super execute];
 	// URL Query Parameters
     NSDictionary* queryParams = [NSDictionary dictionaryWithKeysAndObjects:@"q", @"",nil];
-	
-	RKObjectManager *_objectManager = [CDCommand sharedObjectManagerInstance];
-	
+	RKObjectManager *_objectManager = [CDCommand sharedObjectManagerInstance];	
     // Final Query URL
     RKURL* url = [RKURL URLWithBaseURL:_objectManager.baseURL
                           resourcePath:kWSPathDocuments
                        queryParameters:queryParams];
-	
+	NSString* resourcePath = [NSString stringWithFormat:@"%@?%@&offset=%d&rows=%d&data=id", url.resourcePath, url.query, 0, 1];
+	[_objectManager loadObjectsAtResourcePath:resourcePath
+								   usingBlock:^(RKObjectLoader *loader) {
+									   loader.delegate = self;
+									   loader.objectMapping = [[CDCommand sharedObjectManagerInstance].mappingProvider objectMappingForClass:[CDDocumentSearchResult class]];
 
-	[_objectManager loadObjectsAtResourcePath:[NSString stringWithFormat:@"%@?%@&offset=%d&rows=%d&data=id", url.resourcePath, url.query, 0, 1] usingBlock:^(RKObjectLoader *loader) {
-		loader.targetObject = [[CDDocumentsCount alloc] init];
-		loader.objectMapping = [[_objectManager mappingProvider] objectMappingForClass:[CDDocumentsCount class]];
-		loader.delegate = self;
-	}];
+									   loader.targetObject = [[CDDocumentSearchResult alloc] init];
+								   }];
 }
 
 
@@ -51,35 +50,20 @@
 	}
 }
 
-#pragma mark -
-#pragma mark -
 
-
--(void)objectLoader:(RKObjectLoader *)objectLoader didLoadObjects:(NSArray *)objects
+-(void)objectLoader:(RKObjectLoader *)objectLoader didLoadObject:(id)object
 {
-	CDDocumentsCount *dcObject = [objects objectAtIndex:0];
-	NSLog(@"hits : %@", dcObject.hits);
-	[self didFinishWithResult:dcObject];
+	CDDocumentSearchResult* result = (CDDocumentSearchResult*)object;
+	
+	NSNumber* hits = result.hits;
+	self.finished = YES;
+	[self.delegate processCommandResult:self result:hits message:@""];
+	
 }
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error{
     [super objectLoader:objectLoader didFailWithError:error];
 	NSLog(@"Object loader failed to load the collection due to an error: %@ userInfo: %@", error, [error userInfo]);
-}
-
--(void)didFinishWithResult:(id)result {
-	self.finished = YES;
-	[self.delegate processCommandResult:self result:result message:@""];
-}
-
-
-#pragma mark -
-#pragma mark Call simuleted Rest
-
--(void)callDataRepository {
-    [NSThread sleepForTimeInterval:0.5f];
-	_count = @([[CDDataRepository instance].documents count]);
-	[self didFinishWithResult:_count];
 }
 
 @end

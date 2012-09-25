@@ -64,6 +64,7 @@ static NSString* kWSPathDocuments = @"/documents";
 // mapping stuff
 
 static NSString* kWSDocuments = @"documents";
+static NSString* kDocuments = @"documents";
 
 ////////////////////////////////////////////////////////////////
 

@@ -1,5 +1,5 @@
 //
-//  CDDocumentsCount.h
+//  CDDocumentSearchResult.h
 //  LotsOfManagers
 //
 //  Created by Predrag Karic on 9/24/12.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CDDocumentsCount : NSObject
+@interface CDDocumentSearchResult : NSObject
 
 @property(nonatomic, strong) NSNumber *hits;
 @property(nonatomic, strong) NSMutableArray *documents;
