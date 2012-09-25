@@ -201,7 +201,7 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
         {
             return;
         }
-        NSIndexPath* middle = [indexPaths objectAtIndex:indexPaths.count / 2];
+        NSIndexPath* middle = indexPaths[indexPaths.count / 2];
         
         NSInteger row = middle.row;
         NSInteger new_block = row / FETCH_BLOCK_SIZE;
@@ -253,7 +253,7 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
         }
         else
         {
-            viewModel = [_displayedItems objectAtIndex:itemIndex];
+            viewModel = _displayedItems[itemIndex];
         }
         
         if (viewModel == nil)
@@ -270,7 +270,7 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if([_selectedRows containsObject:[NSNumber numberWithInteger:indexPath.row]]) {
+    if([_selectedRows containsObject:@(indexPath.row)]) {
         cell.selected = YES;
         [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }else{
@@ -283,13 +283,13 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSNumber* row = [NSNumber numberWithInteger:indexPath.row];
+    NSNumber* row = @(indexPath.row);
     [_selectedRows addObject:row];
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [_selectedRows removeObject:[NSNumber numberWithInteger:indexPath.row]];
+    [_selectedRows removeObject:@(indexPath.row)];
 }
 
 

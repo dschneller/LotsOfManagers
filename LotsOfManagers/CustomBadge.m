@@ -125,7 +125,7 @@
 
 + (UIImage*) customBadgeImageWithString:(NSString *)badgeString
 {
-    UIImage* img = [[CustomBadge badgeCache] objectForKey:badgeString];
+    UIImage* img = [CustomBadge badgeCache][badgeString];
     if (!img)
     {
         //NSLog(@"Creating new badge for =%@=", badgeString);
@@ -135,7 +135,7 @@
         img = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
-        [[CustomBadge badgeCache] setObject:img forKey:badgeString];
+        [CustomBadge badgeCache][badgeString] = img;
     }
     return img;
     
