@@ -235,7 +235,7 @@
         UINib* nib = [UINib nibWithNibName:@"CDDocumentStackCell" bundle:[NSBundle mainBundle]];
         NSArray* nibContent = [nib instantiateWithOwner:nil options:nil];
         
-        UIView* topViewFromXib = [nibContent objectAtIndex:0];
+        UIView* topViewFromXib = nibContent[0];
         
         cell = [[AQGridViewCell alloc] initWithFrame:topViewFromXib.frame
                                      reuseIdentifier:docStackCellID];
@@ -267,7 +267,7 @@
         }
         else
         {
-            viewModel = [_displayedItems objectAtIndex:itemIndex];
+            viewModel = _displayedItems[itemIndex];
         }
         
         if (viewModel == nil)

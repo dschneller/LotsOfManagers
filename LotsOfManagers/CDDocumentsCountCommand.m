@@ -78,7 +78,7 @@
 
 -(void)callDataRepository {
     [NSThread sleepForTimeInterval:0.5f];
-	_count = [NSNumber numberWithUnsignedInt:[[CDDataRepository instance].documents count]];
+	_count = @([[CDDataRepository instance].documents count]);
 	[self didFinishWithResult:_count];
 }
 

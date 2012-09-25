@@ -12,8 +12,6 @@
 
 @interface CDTaskManager : NSObject <CDTaskDelegate, CDCommandResult>
 
-@property(nonatomic, strong, readonly) NSMutableDictionary *allLightTasks;
-
 -(void)addTask:(CDTask *)task;
 -(void)cancelTask:(CDTask*)task;
 +(id) instance;

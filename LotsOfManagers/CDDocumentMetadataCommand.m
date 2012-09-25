@@ -55,11 +55,10 @@
 	
 -(void)objectLoader:(RKObjectLoader *)objectLoader didLoadObjects:(NSArray *)objects
 {
-	NSLog(@"objects : %@", objects);
-	//CDDocument *cdObject = [objects objectAtIndex:0];
-	for (CDDocument *doc in objects) {
-		NSLog(@"doc id : %@", doc);
-	}
+//	NSLog(@"objects : %@", objects);
+//	for (CDDocument *doc in objects) {
+//		NSLog(@"doc id : %@", doc);
+//	}
 	[self didFinishWithResult:objects];
 }
 

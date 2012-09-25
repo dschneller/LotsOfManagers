@@ -10,13 +10,13 @@
 
 @interface CDTaskManager ()
 
-@property(nonatomic, strong, readwrite) NSMutableDictionary *allLightTasks;
+@property(nonatomic, strong) NSMutableDictionary *family2task2operation;
 
 @end
 
 @implementation CDTaskManager
 {
-    NSOperationQueue* _lightOperationQueue;
+    NSMutableDictionary* _family2operationqueue;
 }
 
 
@@ -34,39 +34,59 @@
 {
     if (self = [super init])
     {
-		_allLightTasks = [NSMutableDictionary dictionary];
-        _lightOperationQueue = [[NSOperationQueue alloc] init];
-        _lightOperationQueue.maxConcurrentOperationCount = 1;
+		_family2task2operation    = [NSMutableDictionary dictionary];
+        _family2operationqueue    = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
 
 -(void)addTask:(CDTask *)task {
-	@synchronized(_allLightTasks)
+    NSOperationQueue* familyQueue;
+    @synchronized(_family2operationqueue)
     {
-        if ([_allLightTasks objectForKey:task])
+        familyQueue = _family2operationqueue[task.taskFamily];
+        if (!familyQueue)
+        {
+            NSLog(@"Initially creating new OperationQueue for task family %@", task.taskFamily);
+            familyQueue = [[NSOperationQueue alloc] init];
+            familyQueue.maxConcurrentOperationCount = 1;
+            _family2operationqueue[task.taskFamily] = familyQueue;
+        }
+    }
+    
+	@synchronized(_family2task2operation)
+    {
+        NSMutableDictionary* task2op = _family2task2operation[task.taskFamily];
+        if (! task2op)
+        {
+            task2op = [NSMutableDictionary dictionary];
+        }
+        
+        if (task2op[task])
         {
             NSLog(@"Discarding task with id %@, because one is already queued", task.taskId);
             return;
         }
-		task.delegate = self; //used to inform the task manager when the task is done with its job.
+        task.delegate = self; //used to inform the task manager when the task is done with its job.
         
         NSBlockOperation* operation = [[NSBlockOperation alloc] init];
         [operation addExecutionBlock:^{
-			NSLog(@"task executing : %@", task.taskId);
-			[task execute];
+            NSLog(@"task executing : %@", task.taskId);
+            [task execute];
         }];
-        [_allLightTasks setObject:operation forKey:task];
-        [_lightOperationQueue addOperation:operation];
+        task2op[task] = operation;
+        [familyQueue addOperation:operation];
     }
 }
 
 -(void)cancelTask:(CDTask*)task
 {
-	@synchronized(_allLightTasks)
+	@synchronized(_family2task2operation)
     {
-        NSOperation* op = [_allLightTasks objectForKey:task];
+        NSDictionary* task2operation = _family2task2operation[task.taskFamily];
+        NSOperation* op = task2operation[task];
+        
         if (!op)
         {
             NSLog(@"Cannot cancel task id %@, because there is no operation known for it", task.taskId);
@@ -88,13 +108,19 @@
 
 
 -(void)removeTask:(CDTask*)task {
-    @synchronized(_allLightTasks)
+    NSMutableDictionary* task2op = _family2task2operation[task.taskFamily];
+    if (! task2op)
     {
-        NSOperation* op = [_allLightTasks objectForKey:task];
+        NSLog(@"Cannot cancel task id %@, because there is no operation known for it", task.taskId);
+    }
+
+    @synchronized(task2op)
+    {
+        NSOperation* op = task2op[task];
         if (op)
         {
             [op cancel];
-            [_allLightTasks removeObjectForKey:task];
+            [task2op removeObjectForKey:task];
             NSLog(@"task removed from queue : %@", task.taskId);
         }
     }

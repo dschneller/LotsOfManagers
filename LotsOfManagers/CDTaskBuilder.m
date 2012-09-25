@@ -37,6 +37,7 @@
 // Create count task.
 -(CDTask *)createCountTask {
 	CDDocumentsCountTask *task = [[CDDocumentsCountTask alloc] init];
+    task.taskFamily = @"simple";
 	task.taskId = [NSString stringWithFormat:@"count.all"];
 	CDDocumentsCountCommand *command = [[CDDocumentsCountCommand alloc] init];
 	command.originatingTask = task;
@@ -48,6 +49,7 @@
 // create documents metadata task.
 -(CDTask *)createDocumentsMetadataTaskInRange:(NSRange)range {
 	CDDocumentsMetadataTask *task = [[CDDocumentsMetadataTask alloc] init];
+    task.taskFamily = @"simple";
 	task.taskId = [NSString stringWithFormat:@"%@_%d", [task description], range.location];
 	CDDocumentMetadataCommand *command = [[CDDocumentMetadataCommand alloc] init];
 	command.originatingTask = task;

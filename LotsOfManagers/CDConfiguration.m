@@ -8,7 +8,7 @@
 
 #import "CDConfiguration.h"
 
-#define WS_CONFIG_FILE @"WebServiceConfig-Mantest.plist"
+#define WS_CONFIG_FILE @"WebServiceConfig-PROD.plist"
 #define WS_CONFIG_FILE_PROD @"WebServiceConfig-PROD.plist"
 
 @interface CDConfiguration ()

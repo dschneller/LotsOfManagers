@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4120C9EA16119C540062C2B5 /* WebServiceConfig-PROD.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4120C9E916119C540062C2B5 /* WebServiceConfig-PROD.plist */; };
 		41D4879B160B580600F0C457 /* AQGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D4878A160B57A900F0C457 /* AQGridView.m */; };
 		41D4879C160B580600F0C457 /* AQGridViewAnimatorItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D4878B160B57A900F0C457 /* AQGridViewAnimatorItem.m */; };
 		41D4879D160B580600F0C457 /* AQGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D4878C160B57A900F0C457 /* AQGridViewCell.m */; };
@@ -78,7 +79,6 @@
 		7F9D8B9A161051100030CB49 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9D8B991610510F0030CB49 /* libxml2.dylib */; };
 		7F9D8BA0161062480030CB49 /* WebServiceConfig-Mantest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F9D8B9F161062480030CB49 /* WebServiceConfig-Mantest.plist */; };
 		7F9D8BA716107B9A0030CB49 /* CDDocumentsCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9D8BA616107B9A0030CB49 /* CDDocumentsCount.m */; };
-		7FDF14BF1611AD3B003E432D /* WebServiceConfig-PROD.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FDF14BE1611AD3B003E432D /* WebServiceConfig-PROD.plist */; };
 		F08936F1160B658000D5DFE4 /* CDDataRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F08936F0160B658000D5DFE4 /* CDDataRepository.m */; };
 /* End PBXBuildFile section */
 
@@ -128,6 +128,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4120C9E2161194AC0062C2B5 /* Foundation+CollectionLiteralSubscripts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Foundation+CollectionLiteralSubscripts.h"; sourceTree = "<group>"; };
+		4120C9E916119C540062C2B5 /* WebServiceConfig-PROD.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "WebServiceConfig-PROD.plist"; sourceTree = "<group>"; };
 		41D48779160B57A900F0C457 /* AQGridView+CellLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AQGridView+CellLayout.h"; sourceTree = "<group>"; };
 		41D4877A160B57A900F0C457 /* AQGridView+CellLocationDelegation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AQGridView+CellLocationDelegation.h"; sourceTree = "<group>"; };
 		41D4877B160B57A900F0C457 /* AQGridView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AQGridView.h; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 				7F6765DB16108D6A002242C7 /* CDCertificateFingerPrintVerifier.h */,
 				7F6765DC16108D6A002242C7 /* CDCertificateFingerPrintVerifier.m */,
 				7F9D8B9C1610616F0030CB49 /* Configuration */,
+				4120C9E2161194AC0062C2B5 /* Foundation+CollectionLiteralSubscripts.h */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -536,7 +539,7 @@
 		7F9D8B9C1610616F0030CB49 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				7FDF14BE1611AD3B003E432D /* WebServiceConfig-PROD.plist */,
+				4120C9E916119C540062C2B5 /* WebServiceConfig-PROD.plist */,
 				7F9D8B9F161062480030CB49 /* WebServiceConfig-Mantest.plist */,
 				7F9D8B9D1610617F0030CB49 /* CDConfiguration.h */,
 				7F9D8B9E1610617F0030CB49 /* CDConfiguration.m */,
@@ -708,7 +711,7 @@
 				41D487D0160B601300F0C457 /* stapel-4.png in Resources */,
 				41D487D1160B601300F0C457 /* stapel-4@2x.png in Resources */,
 				7F9D8BA0161062480030CB49 /* WebServiceConfig-Mantest.plist in Resources */,
-				7FDF14BF1611AD3B003E432D /* WebServiceConfig-PROD.plist in Resources */,
+				4120C9EA16119C540062C2B5 /* WebServiceConfig-PROD.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -814,7 +817,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -835,7 +838,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;

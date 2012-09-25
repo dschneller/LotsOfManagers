@@ -14,7 +14,8 @@
 
 @interface CDTask : NSObject <NSCopying, CDCommandResult>
 
-@property (nonatomic, strong) NSString *taskId;
+@property (nonatomic, copy) NSString *taskId;
+@property (nonatomic, copy) NSString *taskFamily;
 @property (nonatomic, assign, getter = isFinished) BOOL finished;
 @property (nonatomic, assign, getter = isCancelRequested) BOOL cancelRequested;
 @property (nonatomic, weak) id <CDTaskDelegate> delegate; //used to inform task manager that it is finished its job, and that task manager can proceed another task

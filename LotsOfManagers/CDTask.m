@@ -30,6 +30,7 @@
     new_instance->_delegate = _delegate;
     new_instance->_taskId = _taskId;
     new_instance->_finished = _finished;
+    new_instance->_taskFamily = _taskFamily;
 
     return new_instance;
 }
@@ -43,7 +44,14 @@
         return NO;
     }
 	CDTask *o = (CDTask *)other;
-	return [self.taskId isEqualToString:o.taskId];
+	return [self.taskId isEqualToString:o.taskId] && [self.taskFamily isEqualToString:o.taskFamily];
 }
+
+-(NSUInteger)hash
+{
+    return [self.taskId hash] * [self.taskFamily hash];
+}
+
+
 
 @end
