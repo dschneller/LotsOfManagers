@@ -9,7 +9,7 @@
 #import "CDCertificateFingerPrintVerifier.h"
 #import <CommonCrypto/CommonDigest.h>
 
-#define CD_CERT_FINGERPRINT @""
+#define CD_CERT_FINGERPRINT @"E0 2C 7D DF 2D 75 1B 12 42 E9 ED FB 50 74 83 BF 24 10 7F F0"
 
 #warning TODO: Prepare for multiple certs
 

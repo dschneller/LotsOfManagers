@@ -9,6 +9,7 @@
 #import "CDConfiguration.h"
 
 #define WS_CONFIG_FILE @"WebServiceConfig-Mantest.plist"
+#define WS_CONFIG_FILE_PROD @"WebServiceConfig-PROD.plist"
 
 @interface CDConfiguration ()
 @property (nonatomic, strong) NSDictionary* configValues;
@@ -27,7 +28,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         __sharedInstance = [[CDConfiguration alloc] init];
-        NSString *path = [[NSBundle mainBundle] pathForResource:WS_CONFIG_FILE ofType:nil];
+        NSString *path = [[NSBundle mainBundle] pathForResource:WS_CONFIG_FILE_PROD ofType:nil];
         __sharedInstance.configValues = [NSDictionary dictionaryWithContentsOfFile:path];
     });
     return __sharedInstance;

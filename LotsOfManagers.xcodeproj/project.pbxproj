@@ -78,6 +78,7 @@
 		7F9D8B9A161051100030CB49 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9D8B991610510F0030CB49 /* libxml2.dylib */; };
 		7F9D8BA0161062480030CB49 /* WebServiceConfig-Mantest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F9D8B9F161062480030CB49 /* WebServiceConfig-Mantest.plist */; };
 		7F9D8BA716107B9A0030CB49 /* CDDocumentsCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9D8BA616107B9A0030CB49 /* CDDocumentsCount.m */; };
+		7FDF14BF1611AD3B003E432D /* WebServiceConfig-PROD.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FDF14BE1611AD3B003E432D /* WebServiceConfig-PROD.plist */; };
 		F08936F1160B658000D5DFE4 /* CDDataRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F08936F0160B658000D5DFE4 /* CDDataRepository.m */; };
 /* End PBXBuildFile section */
 
@@ -242,6 +243,7 @@
 		7F9D8B9F161062480030CB49 /* WebServiceConfig-Mantest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "WebServiceConfig-Mantest.plist"; sourceTree = "<group>"; };
 		7F9D8BA516107B9A0030CB49 /* CDDocumentsCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDocumentsCount.h; sourceTree = "<group>"; };
 		7F9D8BA616107B9A0030CB49 /* CDDocumentsCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDocumentsCount.m; sourceTree = "<group>"; };
+		7FDF14BE1611AD3B003E432D /* WebServiceConfig-PROD.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "WebServiceConfig-PROD.plist"; sourceTree = "<group>"; };
 		F08936EF160B658000D5DFE4 /* CDDataRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDataRepository.h; sourceTree = "<group>"; };
 		F08936F0160B658000D5DFE4 /* CDDataRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDataRepository.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -534,6 +536,7 @@
 		7F9D8B9C1610616F0030CB49 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
+				7FDF14BE1611AD3B003E432D /* WebServiceConfig-PROD.plist */,
 				7F9D8B9F161062480030CB49 /* WebServiceConfig-Mantest.plist */,
 				7F9D8B9D1610617F0030CB49 /* CDConfiguration.h */,
 				7F9D8B9E1610617F0030CB49 /* CDConfiguration.m */,
@@ -705,6 +708,7 @@
 				41D487D0160B601300F0C457 /* stapel-4.png in Resources */,
 				41D487D1160B601300F0C457 /* stapel-4@2x.png in Resources */,
 				7F9D8BA0161062480030CB49 /* WebServiceConfig-Mantest.plist in Resources */,
+				7FDF14BF1611AD3B003E432D /* WebServiceConfig-PROD.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

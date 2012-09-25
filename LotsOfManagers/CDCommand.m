@@ -11,7 +11,7 @@
 #import "CDDocumentsCount.h"
 #import "CDDocument.h"
 
-#define ACCESS_TOKEN_HARD_CODED @"0acce234-95d9-4fac-ada8-21a2952c55b6"
+#define ACCESS_TOKEN_HARD_CODED @"8e962e00-f7ec-488c-b924-ed04ed4ae242"
 
 @implementation CDCommand
 
