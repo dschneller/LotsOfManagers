@@ -44,6 +44,7 @@
 			__sharedInstance.client.cachePolicy = RKRequestCachePolicyNone;
 			__sharedInstance.client.requestQueue.showsNetworkActivityIndicatorWhenBusy = YES;
 			__sharedInstance.client.requestQueue = [RKRequestQueue newRequestQueueWithName:@"CDRQ"];
+			__sharedInstance.client.requestQueue.concurrentRequestsLimit = 1;
 			__sharedInstance.client.authenticationType = RKRequestAuthenticationTypeOAuth2;
 	#warning get the real access token and set it as define value
 			__sharedInstance.client.OAuth2AccessToken = ACCESS_TOKEN_HARD_CODED;
@@ -85,6 +86,7 @@
 +(void)setDocumentMetadataMapping {
 	//[[self sharedObjectManagerInstance].mappingProvider addObjectMapping:[self cdDocumentMetadataMapping]];
 	[[self sharedObjectManagerInstance].mappingProvider setMapping:[self cdDocumentMetadataMapping] forKeyPath:@"documents"];
+	[[self sharedObjectManagerInstance].mappingProvider setMapping:[self cdDocumentsCountMapping] forKeyPath:@"hits"];
 
 }
 

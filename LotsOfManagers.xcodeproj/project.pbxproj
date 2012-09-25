@@ -245,7 +245,6 @@
 		7F9D8B9F161062480030CB49 /* WebServiceConfig-Mantest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "WebServiceConfig-Mantest.plist"; sourceTree = "<group>"; };
 		7F9D8BA516107B9A0030CB49 /* CDDocumentsCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDocumentsCount.h; sourceTree = "<group>"; };
 		7F9D8BA616107B9A0030CB49 /* CDDocumentsCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDocumentsCount.m; sourceTree = "<group>"; };
-		7FDF14BE1611AD3B003E432D /* WebServiceConfig-PROD.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "WebServiceConfig-PROD.plist"; sourceTree = "<group>"; };
 		F08936EF160B658000D5DFE4 /* CDDataRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDataRepository.h; sourceTree = "<group>"; };
 		F08936F0160B658000D5DFE4 /* CDDataRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDataRepository.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */

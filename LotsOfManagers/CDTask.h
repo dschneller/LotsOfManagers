@@ -19,9 +19,15 @@
 @property (nonatomic, assign, getter = isFinished) BOOL finished;
 @property (nonatomic, assign, getter = isCancelRequested) BOOL cancelRequested;
 @property (nonatomic, weak) id <CDTaskDelegate> delegate; //used to inform task manager that it is finished its job, and that task manager can proceed another task
+@property (nonatomic, strong) NSCondition* doneCondition;
+@property (nonatomic, assign) BOOL done;
 
 -(void)execute;
 -(void)cancel;
+
+-(void)doYourThing;
+-(void)cancelYourThing;
+-(BOOL)processYourThing:(CDCommand*)command result:(id)result message:(NSString*)message;
 
 @end
 

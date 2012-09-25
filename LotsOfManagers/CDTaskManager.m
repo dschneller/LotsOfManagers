@@ -89,7 +89,7 @@
         
         if (!op)
         {
-            NSLog(@"Cannot cancel task id %@, because there is no operation known for it", task.taskId);
+//            NSLog(@"Cannot cancel task id %@, because there is no operation known for it", task.taskId);
             return;
         }
         [task cancel];
@@ -111,7 +111,8 @@
     NSMutableDictionary* task2op = _family2task2operation[task.taskFamily];
     if (! task2op)
     {
-        NSLog(@"Cannot cancel task id %@, because there is no operation known for it", task.taskId);
+//        NSLog(@"Cannot remove task id %@, because there is no operation known for it", task.taskId);
+//		return;
     }
 
     @synchronized(task2op)

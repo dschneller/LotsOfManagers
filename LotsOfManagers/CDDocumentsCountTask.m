@@ -12,20 +12,18 @@
 @implementation CDDocumentsCountTask
 
 
--(void)execute {
-    if (!self.isCancelRequested)
-    {
-        NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>>>> COUNT TASK RUNNING <<<<<<<<<<<<<<<<<<<<<<");        
-        [self.documentsCountCommand execute];
-    }
+
+-(void)doYourThing {
+	[self.documentsCountCommand execute];
 }
 
--(void)cancel {
-    [super cancel];
+-(void)cancelYourThing {
 	[self.documentsCountCommand cancel];
 }
 
-- (void) processCommandResult:(CDCommand *)command result:(id)result message:(NSString *)message {
+
+- (BOOL) processYourThing:(CDCommand*)command result:(id)result message:(NSString*)message
+{
 	if (command.isFinished) { // command finished notify with result
 		[self.delegate cdTaskDidFinish:self]; //task is finished it should be removed from the queue
 		dispatch_async(dispatch_get_main_queue(), ^{
@@ -33,7 +31,9 @@
                                                                 object:((CDDocumentsCount *) result).hits
                                                               userInfo:nil];
         });
+		return YES;
 	}
+	return NO;
 }
 
 @end

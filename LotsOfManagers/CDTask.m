@@ -11,17 +11,74 @@
 @implementation CDTask
 
 
+-(id)init
+{
+	if (self = [super init])
+	{
+		_doneCondition = [[NSCondition alloc] init];
+	}
+	return self;
+}
+
 -(void)execute {
+	if (!self.cancelRequested)
+	{
+		NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>>>> TASK START [%@] %@ >>>>>>>>>>>>>>>>>>>>>>", self.taskFamily, self.taskId);
+		[self.doneCondition lock];
+
+		[self doYourThing];
+		
+		while (!_done) {
+			[self.doneCondition wait];
+		}
+		[self.doneCondition unlock];
+		NSLog(@"<<<<<<<<<<<<<<<<<<<<<<<<<<<< TASK END   [%@] %@ <<<<<<<<<<<<<<<<<<<<<<", self.taskFamily, self.taskId);
+
+	}
+}
+
+-(void)cancel {
+	[self.doneCondition lock];
+	self.cancelRequested = YES;
+
+	[self cancelYourThing];
+	
+	_done = YES;
+	[self.doneCondition signal];
+	[self.doneCondition unlock];
+	
+}
+
+
+-(void)doYourThing
+{
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:[NSString stringWithFormat:@"You must override %@ in a subclass",
                                            NSStringFromSelector(_cmd)]
                                  userInfo:nil];
 }
 
-/** cancel task and all of its commands */
--(void)cancel {
-	self.cancelRequested = YES;
+-(void)cancelYourThing
+{
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass",
+                                           NSStringFromSelector(_cmd)]
+                                 userInfo:nil];
 }
+
+
+- (void) processCommandResult:(CDCommand *)command result:(id)result message:(NSString *)message {
+	[self.doneCondition lock];
+	
+	if ([self processYourThing:command result:result message:message])
+	{
+		_done = YES;
+		[self.doneCondition signal];
+	}
+	
+	[self.doneCondition unlock];
+}
+
 
 -(id)copyWithZone:(NSZone *)zone
 {
@@ -31,6 +88,7 @@
     new_instance->_taskId = _taskId;
     new_instance->_finished = _finished;
     new_instance->_taskFamily = _taskFamily;
+	new_instance->_doneCondition = _doneCondition;
 
     return new_instance;
 }
