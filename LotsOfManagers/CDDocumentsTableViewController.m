@@ -8,8 +8,9 @@
 
 #import "CDDocumentsTableViewController.h"
 #import "CDDocument.h"
+#import "CDPreview.h"
 
-#define FETCH_BLOCK_SIZE 50
+#define FETCH_BLOCK_SIZE 25
 #define NUM_BLOCKS 3
 
 @interface CDDocumentsTableViewController ()
@@ -28,6 +29,7 @@
     
     CDTask* _countTask;
     CDTask* _metadataTask;
+	NSMutableSet* _previewTasks;
     
     // used to determine scrolling speed
     NSTimeInterval _lastOffsetCapture;
@@ -42,6 +44,7 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	_previewTasks = [NSMutableSet set];
     _scrollingInProgress = NO;
     _totalCount = 0;
     _currentBlock = 0;
@@ -63,6 +66,12 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
      name:ELEMENT_COUNT_RETRIEVED_NOTIFICATION
      object:nil];
 
+	[[NSNotificationCenter defaultCenter]
+	 addObserver:self
+	 selector:@selector(handlePreviewLoaded:)
+	 name:DATAMGR_PREVIEW_LOADED_NOTIFICATION
+	 object:nil];
+	
     
     if (_displayedItems == nil)
     {
@@ -102,21 +111,86 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
 	NSNumber *n_loc = [result valueForKey:@"range"];
     NSUInteger loc = [n_loc unsignedIntegerValue];
     
+    NSArray* visibleCellIndexPaths = [self.tableView indexPathsForVisibleRows];
+	NSUInteger firstVisibleRow = ((NSIndexPath*)visibleCellIndexPaths[0]).row;
+	NSInteger itemIndex = firstVisibleRow - ((_currentBlock == 0 ? 0 : _currentBlock-1) * FETCH_BLOCK_SIZE);
+	NSUInteger relevantRangeLength = (NUM_BLOCKS * FETCH_BLOCK_SIZE);
+	if (itemIndex > relevantRangeLength || itemIndex < 0)
+	{
+		NSLog(@"Ignoring document received notification, itemIndex %d > %d; firstVisibleRow: %d, current block: %d", itemIndex, relevantRangeLength, firstVisibleRow, _currentBlock);
+		// the table has already scrolled past the range of documents that
+		// this notification covers. So we need to schedule anything for the
+		// UI, another notification should be on the way anyhow.
+		return;
+	}
+	
+	
     NSMutableArray* newDisplayedItems = [NSMutableArray arrayWithCapacity:documents.count];
-    
-    for (CDDocument* doc in documents)
+	for (NSUInteger i=0; i<documents.count; i++)
+	{
+		[newDisplayedItems addObject:[NSNull null]];
+	}
+
+	for (NSIndexPath *path in visibleCellIndexPaths)
+	{
+		NSUInteger itemIndex = path.row-loc;
+		CDDocumentViewModel *viewModel = [self createDocumentViewModelForIndex:itemIndex withDocument:documents[itemIndex]];
+		newDisplayedItems[itemIndex] = viewModel;
+	}
+	
+    for (NSUInteger itemIndex=0; itemIndex<documents.count; itemIndex++)
     {
-        CDDocumentViewModel* viewModel = [[CDDocumentViewModel alloc] init];
-        viewModel.documentFileName = doc.filename;
-        viewModel.smallThumbImage = [UIImage imageNamed:@"first"];
-    
-        [newDisplayedItems addObject:viewModel];
+		if (newDisplayedItems[itemIndex] == [NSNull null])
+		{
+			CDDocumentViewModel *viewModel = [self createDocumentViewModelForIndex:itemIndex withDocument:documents[itemIndex]];
+			newDisplayedItems[itemIndex] = viewModel;
+		}
     }
     _cachedRange = NSMakeRange(loc, NUM_BLOCKS*FETCH_BLOCK_SIZE);
     _displayedItems = newDisplayedItems;
     [self refreshVisibleItems:self.tableView];
 }
 
+- (CDDocumentViewModel *)createDocumentViewModelForIndex:(NSUInteger)itemIndex withDocument:(CDDocument *)doc
+{
+    CDDocumentViewModel* viewModel = [[CDDocumentViewModel alloc] init];
+    viewModel.documentId = doc.documentId;
+    viewModel.documentFileName = doc.filename;
+#warning provide correct preview resolution for device
+    NSString* res = @"240x240";
+    CDPreview* preview = [CDPreview previewForDocument:doc page:1 resolution:res allowPlaceholder:YES];
+    if (preview.isPlaceholder)
+    {
+        [_previewTasks addObject:[[CDDataManager instance] retrievePreviewForDocument:doc page:1 resolution:res version:doc.version]];
+    }else {
+        viewModel.smallThumbImage = preview.image;
+    }
+    return viewModel;
+}
+
+
+- (void) handlePreviewLoaded:(NSNotification*)notification
+{
+	UIImage* image = notification.object;
+	NSDictionary* userInfo = notification.userInfo;
+	
+	NSString* previewAvailability = userInfo[@"preview-availability"];
+	if ([@"available" isEqualToString:previewAvailability])
+	{
+		for (CDDocumentViewModel* viewModel in _displayedItems)
+		{
+			if ([viewModel.documentId isEqualToString:userInfo[@"documentId"]])
+			{
+				viewModel.smallThumbImage = image;
+			}
+		}
+		[self refreshVisibleItems:self.tableView];
+	}
+	else
+	{
+		NSLog(@"Preview availability: %@", previewAvailability);
+	}
+}
 
 #pragma mark - Scroll Delegate
 
@@ -137,7 +211,6 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    NSLog(@"Did End Decvelertio");
     _scrollingInProgress = NO;
     [self refreshVisibleItems:scrollView];
 }
@@ -216,6 +289,8 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
             
             // order data manager to fetch documents in given range
             [[CDDataManager instance] cancelTask:_metadataTask];
+			[[CDDataManager instance] cancelTasks:_previewTasks];
+			
             _metadataTask = [[CDDataManager instance] retrieveDocumentsInRange:new_range];
         }
     }
@@ -243,6 +318,7 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
     if (self.isScrollingFast)
     {
         cell.textLabel.text = [NSString stringWithFormat:@"%d --- ---", indexPath.row];
+		cell.imageView.image = [UIImage imageNamed:@"stapel-1-dots"];
     }
     else
     {
@@ -259,10 +335,12 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
         if (viewModel == nil)
         {
             cell.textLabel.text = [NSString stringWithFormat:@"%d ...", indexPath.row];
+			cell.imageView.image = [UIImage imageNamed:@"stapel-1-dots"];
         }
         else
         {
             cell.textLabel.text = [NSString stringWithFormat:@"%d File: %@",indexPath.row, viewModel.documentFileName];
+			cell.imageView.image = viewModel.smallThumbImage;
         }
     }
     return cell;

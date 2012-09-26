@@ -7,12 +7,19 @@
 //
 
 #import "CDAppDelegate.h"
+#import "CDCommand.h"
 
 @implementation CDAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+#warning warkaround
+	/**
+	* There is a problem if restkit is not yet initialized, and the view controller triggers tha task i.e. count all docs, because of the locking mechanism which is introduced, the app will just stop. I assume it is timing issue.
+	**/
+	
+	[CDCommand sharedObjectManagerInstance];
     return YES;
 }
 							

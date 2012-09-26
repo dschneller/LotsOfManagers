@@ -10,6 +10,7 @@
 
 @interface CDDocumentViewModel : NSObject
 
+@property (nonatomic, copy) NSString* documentId;
 @property (nonatomic, copy) NSString* documentFileName;
 @property (nonatomic, strong) UIImage* smallThumbImage;
 

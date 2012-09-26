@@ -9,12 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "CDTask.h"
 #import "CDTaskManager.h"
+#import "CDDocument.h"
 
 @interface CDDataManager : NSObject
 
 + (id) instance;
 - (CDTask*)retrieveDocumentsInRange:(NSRange)range;
 - (CDTask*)retrieveElementCount;
+- (CDTask*)retrievePreviewForDocument:(CDDocument*)doc page:(NSUInteger)page resolution:(NSString*)res version:(NSUInteger)version;
 - (void)cancelTask:(CDTask*)task;
-
+- (void)cancelTasks:(id<NSFastEnumeration>)collectionOfTasks;
 @end

@@ -14,6 +14,8 @@
 
 -(void)addTask:(CDTask *)task;
 -(void)cancelTask:(CDTask*)task;
+-(void)cancelTasks:(id<NSFastEnumeration>)collectionOfTasks;
+
 +(id) instance;
 
 

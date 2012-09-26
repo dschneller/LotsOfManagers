@@ -52,6 +52,8 @@
 -(void)execute;
 -(void)didFinishWithResult:(id)result;
 -(void)cancel;
+-(NSArray*) getAcceptedContentTypes;
+
 
 +(RKObjectManager *)sharedObjectManagerInstance;
 

@@ -79,6 +79,11 @@
 		7F9D8B9A161051100030CB49 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9D8B991610510F0030CB49 /* libxml2.dylib */; };
 		7F9D8BA0161062480030CB49 /* WebServiceConfig-Mantest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F9D8B9F161062480030CB49 /* WebServiceConfig-Mantest.plist */; };
 		7F9D8BA716107B9A0030CB49 /* CDDocumentSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9D8BA616107B9A0030CB49 /* CDDocumentSearchResult.m */; };
+		7FC302631611FCBA00DFC1E9 /* CDPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC302601611FCBA00DFC1E9 /* CDPreview.m */; };
+		7FC302641611FCBA00DFC1E9 /* CDPreviewKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC302621611FCBA00DFC1E9 /* CDPreviewKey.m */; };
+		7FC302671611FE5100DFC1E9 /* CDPreviewImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC302661611FE5100DFC1E9 /* CDPreviewImageCache.m */; };
+		7FC3026A16120AF900DFC1E9 /* CDDocumentPreviewTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC3026916120AF800DFC1E9 /* CDDocumentPreviewTask.m */; };
+		7FC3026E16120BEB00DFC1E9 /* CDDocumentPreviewCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC3026D16120BEB00DFC1E9 /* CDDocumentPreviewCommand.m */; };
 		F08936F1160B658000D5DFE4 /* CDDataRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F08936F0160B658000D5DFE4 /* CDDataRepository.m */; };
 /* End PBXBuildFile section */
 
@@ -245,6 +250,16 @@
 		7F9D8B9F161062480030CB49 /* WebServiceConfig-Mantest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "WebServiceConfig-Mantest.plist"; sourceTree = "<group>"; };
 		7F9D8BA516107B9A0030CB49 /* CDDocumentSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDocumentSearchResult.h; sourceTree = "<group>"; };
 		7F9D8BA616107B9A0030CB49 /* CDDocumentSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDocumentSearchResult.m; sourceTree = "<group>"; };
+		7FC3025F1611FCBA00DFC1E9 /* CDPreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDPreview.h; sourceTree = "<group>"; };
+		7FC302601611FCBA00DFC1E9 /* CDPreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDPreview.m; sourceTree = "<group>"; };
+		7FC302611611FCBA00DFC1E9 /* CDPreviewKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDPreviewKey.h; sourceTree = "<group>"; };
+		7FC302621611FCBA00DFC1E9 /* CDPreviewKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDPreviewKey.m; sourceTree = "<group>"; };
+		7FC302651611FE5100DFC1E9 /* CDPreviewImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDPreviewImageCache.h; sourceTree = "<group>"; };
+		7FC302661611FE5100DFC1E9 /* CDPreviewImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDPreviewImageCache.m; sourceTree = "<group>"; };
+		7FC3026816120AF800DFC1E9 /* CDDocumentPreviewTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDocumentPreviewTask.h; sourceTree = "<group>"; };
+		7FC3026916120AF800DFC1E9 /* CDDocumentPreviewTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDocumentPreviewTask.m; sourceTree = "<group>"; };
+		7FC3026C16120BEB00DFC1E9 /* CDDocumentPreviewCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDocumentPreviewCommand.h; sourceTree = "<group>"; };
+		7FC3026D16120BEB00DFC1E9 /* CDDocumentPreviewCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDocumentPreviewCommand.m; sourceTree = "<group>"; };
 		F08936EF160B658000D5DFE4 /* CDDataRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDataRepository.h; sourceTree = "<group>"; };
 		F08936F0160B658000D5DFE4 /* CDDataRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDataRepository.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -459,6 +474,8 @@
 				7F22FA15160B1FF4009E3C16 /* CDDocumentsMetadataTask.m */,
 				7F22FA2D160B4CF3009E3C16 /* CDDocumentsCountTask.h */,
 				7F22FA2E160B4CF3009E3C16 /* CDDocumentsCountTask.m */,
+				7FC3026816120AF800DFC1E9 /* CDDocumentPreviewTask.h */,
+				7FC3026916120AF800DFC1E9 /* CDDocumentPreviewTask.m */,
 			);
 			name = Task;
 			sourceTree = "<group>";
@@ -466,6 +483,7 @@
 		7F22FA17160B212A009E3C16 /* Commands */ = {
 			isa = PBXGroup;
 			children = (
+				7FC3026B16120BC200DFC1E9 /* DocumentPreviewCommand */,
 				7F22FA34160B5116009E3C16 /* DocumentsCountCommand */,
 				7F22FA1C160B2173009E3C16 /* Root */,
 				7F22FA18160B2135009E3C16 /* DocumentMetadataCommand */,
@@ -525,6 +543,12 @@
 		7F9D8B9B161061670030CB49 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				7FC302651611FE5100DFC1E9 /* CDPreviewImageCache.h */,
+				7FC302661611FE5100DFC1E9 /* CDPreviewImageCache.m */,
+				7FC3025F1611FCBA00DFC1E9 /* CDPreview.h */,
+				7FC302601611FCBA00DFC1E9 /* CDPreview.m */,
+				7FC302611611FCBA00DFC1E9 /* CDPreviewKey.h */,
+				7FC302621611FCBA00DFC1E9 /* CDPreviewKey.m */,
 				7F6765D916108D6A002242C7 /* NSString+Crypto.h */,
 				7F6765DA16108D6A002242C7 /* NSString+Crypto.m */,
 				7F6765DB16108D6A002242C7 /* CDCertificateFingerPrintVerifier.h */,
@@ -581,6 +605,15 @@
 				7F9D8BA616107B9A0030CB49 /* CDDocumentSearchResult.m */,
 			);
 			name = Document;
+			sourceTree = "<group>";
+		};
+		7FC3026B16120BC200DFC1E9 /* DocumentPreviewCommand */ = {
+			isa = PBXGroup;
+			children = (
+				7FC3026C16120BEB00DFC1E9 /* CDDocumentPreviewCommand.h */,
+				7FC3026D16120BEB00DFC1E9 /* CDDocumentPreviewCommand.m */,
+			);
+			name = DocumentPreviewCommand;
 			sourceTree = "<group>";
 		};
 		F08936ED160B655000D5DFE4 /* DataRepository */ = {
@@ -761,6 +794,11 @@
 				7F22FA33160B4DD1009E3C16 /* CDTaskBuilder.m in Sources */,
 				7F22FA37160B513C009E3C16 /* CDDocumentsCountCommand.m in Sources */,
 				7F9D8BA716107B9A0030CB49 /* CDDocumentSearchResult.m in Sources */,
+				7FC302631611FCBA00DFC1E9 /* CDPreview.m in Sources */,
+				7FC302641611FCBA00DFC1E9 /* CDPreviewKey.m in Sources */,
+				7FC302671611FE5100DFC1E9 /* CDPreviewImageCache.m in Sources */,
+				7FC3026A16120AF900DFC1E9 /* CDDocumentPreviewTask.m in Sources */,
+				7FC3026E16120BEB00DFC1E9 /* CDDocumentPreviewCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

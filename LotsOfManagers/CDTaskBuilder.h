@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CDTask.h"
+#import "CDDocument.h"
 
 /**
  * CDTaskBuilder responsible for creating tasks.
@@ -23,5 +24,7 @@
 
 //create task for documents metadata retrieving which are in provided range
 -(CDTask *)createDocumentsMetadataTaskInRange:(NSRange)range;
+
+-(CDTask *)createPreviewTaskForDocument:(CDDocument*)doc page:(NSUInteger)page resolution:(NSString*)res version:(NSUInteger)version;
 
 @end

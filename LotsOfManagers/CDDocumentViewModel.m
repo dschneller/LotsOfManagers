@@ -10,7 +10,4 @@
 
 @implementation CDDocumentViewModel
 
-@synthesize documentFileName = _documentFileName;
-@synthesize smallThumbImage = _smallThumbImage;
-
 @end

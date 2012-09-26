@@ -28,6 +28,13 @@
 }
 
 
+- (void)requestWillPrepareForSend:(RKRequest *)request
+{
+	NSString* allAcceptedTypes = [[self getAcceptedContentTypes] componentsJoinedByString:@", "];
+	request.additionalHTTPHeaders = @{ WS_ACCEPT : allAcceptedTypes };
+}
+
+
 +(RKObjectManager *) sharedObjectManagerInstance {
 	
 	static RKObjectManager* __sharedInstance;
@@ -37,7 +44,7 @@
 		dispatch_once(&onceToken, ^{
 #if DEBUG
 		//				RKLogConfigureByName("RestKit/Network", RKLogLevelDebug);
-			            RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelDebug);
+//			            RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelDebug);
 #endif
 			__sharedInstance = [RKObjectManager managerWithBaseURLString:[CDConfiguration sharedConfig].webServiceURL];
 			__sharedInstance.client.cachePolicy = RKRequestCachePolicyNone;
@@ -63,9 +70,12 @@
 	[CDCommand sharedObjectManagerInstance].client = client;
 }
 
-+ (void)addAccept {
-	[[CDCommand sharedObjectManagerInstance].client.HTTPHeaders setValue:WS_ALL_MEDIA_TYPE forKey:WS_ACCEPT];
+
+-(NSArray*) getAcceptedContentTypes
+{
+	return @[WS_APP_JSON];
 }
+
 
 #pragma mark - 
 #pragma mark  RKObjectLoaderDelegate

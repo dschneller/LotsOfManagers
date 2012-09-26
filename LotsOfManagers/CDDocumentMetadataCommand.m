@@ -31,6 +31,7 @@
 	
 
 	NSString* resourcePath = [NSString stringWithFormat:@"%@?%@", url.resourcePath, url.query];
+
 	[_objectManager loadObjectsAtResourcePath:resourcePath
 								   usingBlock:^(RKObjectLoader *loader) {
 									   loader.delegate = self;
@@ -44,9 +45,10 @@
 	
 }
 
+
 #pragma mark -
 #pragma mark RKObjectLoaderDelegate
-	
+
 - (void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response
 {
 	if ([response isSuccessful]) {

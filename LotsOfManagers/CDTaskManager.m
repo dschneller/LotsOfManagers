@@ -61,6 +61,7 @@
         if (! task2op)
         {
             task2op = [NSMutableDictionary dictionary];
+			_family2task2operation[task.taskFamily] = task2op;
         }
         
         if (task2op[task])
@@ -78,6 +79,14 @@
         task2op[task] = operation;
         [familyQueue addOperation:operation];
     }
+}
+
+-(void)cancelTasks:(id<NSFastEnumeration>)collection
+{
+	for (CDTask* task in collection)
+	{
+		[self cancelTask:task];
+	}
 }
 
 -(void)cancelTask:(CDTask*)task

@@ -34,9 +34,16 @@
 {
     if (self = [super init])
     {
-		//custom initialization
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePreviewLoaded:)
+													 name:TASK_PREVIEW_LOADED_NOTIFICATION
+												   object:nil];
     }
     return self;
+}
+
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Retrieve data
@@ -55,10 +62,33 @@
     return task;
 }
 
+- (CDTask*)retrievePreviewForDocument:(CDDocument*)doc page:(NSUInteger)page resolution:(NSString*)res version:(NSUInteger)version
+{
+	CDTask *task = [[CDTaskBuilder instance] createPreviewTaskForDocument:doc page:page resolution:res version:version];
+	[[CDTaskManager instance] addTask:task];
+	return task;
+}
+
+- (void)handlePreviewLoaded:(NSNotification*)notification
+{
+	UIImage* image = notification.object;
+	
+	NSLog(@"Data manager was informed about preview being available for document id %@", notification.userInfo[@"documentId"]);
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[[NSNotificationCenter defaultCenter] postNotificationName:DATAMGR_PREVIEW_LOADED_NOTIFICATION object:image userInfo:notification.userInfo];
+	});
+}
+
 - (void)cancelTask:(CDTask*)task
 {
     [[CDTaskManager instance] cancelTask:task];
 }
 
+
+- (void)cancelTasks:(id<NSFastEnumeration>)collectionOfTasks {
+	for (CDTask *task in collectionOfTasks) {
+		[self cancelTask:task];
+	}
+}
 
 @end

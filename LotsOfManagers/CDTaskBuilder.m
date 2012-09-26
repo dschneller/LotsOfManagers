@@ -11,6 +11,8 @@
 #import "CDDocumentsCountCommand.h"
 #import "CDDocumentsMetadataTask.h"
 #import "CDDocumentMetadataCommand.h"
+#import "CDDocumentPreviewTask.h"
+#import "CDDocumentPreviewCommand.h"
 #import "CDTaskManager.h"
 
 @implementation CDTaskBuilder
@@ -59,5 +61,20 @@
 	return task;
 }
 
+-(CDTask*) createPreviewTaskForDocument:(CDDocument *)doc page:(NSUInteger)page resolution:(NSString *)res version:(NSUInteger)version
+{
+	CDDocumentPreviewTask *task = [[CDDocumentPreviewTask alloc] init];
+	task.taskFamily = @"preview";
+	task.taskId = [NSString stringWithFormat:@"preview-doc%@-p%d-res%@-v%d", doc.documentId, page, res, version];
+	CDDocumentPreviewCommand *command = [[CDDocumentPreviewCommand alloc] init];
+	command.originatingTask = task;
+	command.delegate = [CDTaskManager instance];
+	command.documentId = doc.documentId;
+	command.resolution = res;
+	command.page = page;
+	command.version = version;
+	task.documentPreviewCommand = command;
+	return task;
+}
 
 @end

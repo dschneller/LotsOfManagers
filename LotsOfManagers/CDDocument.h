@@ -10,9 +10,10 @@
 
 @interface CDDocument : NSObject
 
-@property NSString* filename;
-@property NSString* author;
-@property NSString* documentId;
+@property (nonatomic, copy) NSString* filename;
+@property (nonatomic, copy) NSString* author;
+@property (nonatomic, copy) NSString* documentId;
+@property (nonatomic, assign) NSInteger version;
 
 
 @end
