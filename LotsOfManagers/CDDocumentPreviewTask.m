@@ -32,9 +32,15 @@
 		 @"version" : @(self.documentPreviewCommand.version),
 		 @"page" : @(self.documentPreviewCommand.page),
 		 @"resolution" : self.documentPreviewCommand.resolution}];
-		return YES;
 	}
-	return NO;
+return YES;
+}
+
+-(BOOL)processYourFailure:(CDCommand *)command result:(id)result message:(NSString *)message error:(NSError *)error
+{
+#warning Handle failed preview request, e. g. notify UI in a special way, so it can display an error placejolder or something.
+	NSLog(@"Preview request failed for documentId: %@. Message: %@", self.documentPreviewCommand.documentId, message);
+	return YES;
 }
 
 @end

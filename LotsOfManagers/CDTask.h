@@ -28,6 +28,7 @@
 -(void)doYourThing;
 -(void)cancelYourThing;
 -(BOOL)processYourThing:(CDCommand*)command result:(id)result message:(NSString*)message;
+-(BOOL)processYourFailure:(CDCommand *)command result:(id)result message:(NSString *)message error:(NSError*)error;
 
 @end
 

@@ -157,7 +157,7 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
     viewModel.documentId = doc.documentId;
     viewModel.documentFileName = doc.filename;
 #warning provide correct preview resolution for device
-    NSString* res = @"240x240";
+    NSString* res = @"1080x1080";
     CDPreview* preview = [CDPreview previewForDocument:doc page:1 resolution:res allowPlaceholder:YES];
     if (preview.isPlaceholder)
     {

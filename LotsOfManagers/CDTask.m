@@ -29,6 +29,7 @@
 		[self doYourThing];
 		
 		while (!_done) {
+			NSLog(@">>> TASK WAITING FOR DONE CONDITION %@", self.taskId);
 			[self.doneCondition wait];
 		}
 		[self.doneCondition unlock];
@@ -38,6 +39,7 @@
 }
 
 -(void)cancel {
+	NSLog(@">>> TASK REQUESTED TO CANCEL %@", self.taskId);
 	[self.doneCondition lock];
 	self.cancelRequested = YES;
 
@@ -66,11 +68,40 @@
                                  userInfo:nil];
 }
 
+-(BOOL)processYourThing:(CDCommand *)command result:(id)result message:(NSString *)message
+{
+	@throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass",
+                                           NSStringFromSelector(_cmd)]
+                                 userInfo:nil];
+}
+
+-(BOOL)processYourFailure:(CDCommand *)command result:(id)result message:(NSString *)message error:(NSError*)error
+{
+//	@throw [NSException exceptionWithName:NSInternalInconsistencyException
+//								   reason:[NSString stringWithFormat:@"You must override %@ in a subclass",
+//										   NSStringFromSelector(_cmd)]
+//								 userInfo:nil];
+	return YES;
+}
+
 
 - (void) processCommandResult:(CDCommand *)command result:(id)result message:(NSString *)message {
 	[self.doneCondition lock];
 	
 	if ([self processYourThing:command result:result message:message])
+	{
+		_done = YES;
+		[self.doneCondition signal];
+	}
+	
+	[self.doneCondition unlock];
+}
+
+- (void) processFailedResult:(CDCommand *)command result:(id)result message:(NSString *)message error:(NSError*)error {
+	[self.doneCondition lock];
+	
+	if ([self processYourFailure:command result:result message:message error:error])
 	{
 		_done = YES;
 		[self.doneCondition signal];

@@ -43,6 +43,14 @@ static NSString* kWSPathDocument = @"/document";
 #pragma mark -
 #pragma mark RKObjectLoaderDelegate
 
+
+- (void)requestDidCancelLoad:(RKRequest *)request
+{
+	NSLog(@"Document Preview Command Cancelled: %@", self.documentId);
+	
+	request.delegate = nil; // remove ourself as the delegate
+}
+
 - (void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response
 {
 	if ([response isOK]) { //200
@@ -61,6 +69,7 @@ static NSString* kWSPathDocument = @"/document";
 			else
 			{
 				NSLog(@"Did not schedule preview UI update for document %@, because CDPreview returned NO from savePNGData:forDocument", self.documentId);
+				[self.delegate processCommandResult:self result:nil message:@"Failed to get preview"];
 			}
         }
 		
@@ -71,8 +80,8 @@ static NSString* kWSPathDocument = @"/document";
 		[self.delegate processCommandResult:self result:nil message:@"No preview (yet)"];
     }
     else {
-		NSLog(@"*****Process Unsuccessful response is missing*******");
-//		[self.delegate processUnsuccessfulResponse:response request:request];
+		NSLog(@"*****Preview command returned code 500");
+		[self.delegate processFailedResult:self result:nil message:response.bodyAsString error:nil];
 	}
 }
 

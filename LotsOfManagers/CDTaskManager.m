@@ -143,9 +143,19 @@
 - (void) processCommandResult:(CDCommand *)command result:(id)result message:(NSString *)message {
 	if (command.originatingTask.isCancelRequested) {
 		//nothing to do
-		NSLog(@"Command from taskId :%@ is ignored", command.originatingTask.taskId);
+		NSLog(@"Result from taskId :%@ is ignored", command.originatingTask.taskId);
 	}else {
 		[command.originatingTask processCommandResult:command result:result message:message];
+	}
+}
+
+- (void)processFailedResult:(CDCommand *)command result:(id)result message:(NSString *)message error:(NSError *)error
+{
+	if (command.originatingTask.isCancelRequested) {
+		//nothing to do
+		NSLog(@"Failure from taskId :%@ is ignored", command.originatingTask.taskId);
+	}else {
+		[command.originatingTask processFailedResult:command result:result message:message error:error];
 	}
 }
 

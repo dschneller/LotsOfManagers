@@ -13,6 +13,7 @@
 @protocol CDCommandResult <NSObject>
 
 - (void) processCommandResult:(CDCommand *)command result:(id)result message:(NSString *)message;
+- (void) processFailedResult:(CDCommand *)command result:(id)result message:(NSString *)message error:(NSError*)error;
 
 @end
 
