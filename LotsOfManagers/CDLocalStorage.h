@@ -11,4 +11,5 @@
 
 @interface CDLocalStorage : NSObject
 
+
 @end

@@ -61,6 +61,7 @@
 		41D95D311608BB950084AD0D /* NSObject+PerformBlockAfterDelay.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D95D301608BB950084AD0D /* NSObject+PerformBlockAfterDelay.m */; };
 		7F1C508E16147206006C9FB7 /* CDLocalStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F1C508D16147206006C9FB7 /* CDLocalStorage.m */; };
 		7F1C50F71614965B006C9FB7 /* lotsofmanagers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7F1C50F51614965B006C9FB7 /* lotsofmanagers.xcdatamodeld */; };
+		7F1C50FA16149CD9006C9FB7 /* DocumentCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F1C50F916149CD9006C9FB7 /* DocumentCD.m */; };
 		7F22FA10160B1B48009E3C16 /* CDTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F22FA0F160B1B48009E3C16 /* CDTaskManager.m */; };
 		7F22FA13160B1B5F009E3C16 /* CDTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F22FA12160B1B5F009E3C16 /* CDTask.m */; };
 		7F22FA16160B1FF4009E3C16 /* CDDocumentsMetadataTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F22FA15160B1FF4009E3C16 /* CDDocumentsMetadataTask.m */; };
@@ -222,6 +223,8 @@
 		7F1C508C16147206006C9FB7 /* CDLocalStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDLocalStorage.h; sourceTree = "<group>"; };
 		7F1C508D16147206006C9FB7 /* CDLocalStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDLocalStorage.m; sourceTree = "<group>"; };
 		7F1C50F61614965B006C9FB7 /* lotsofmanagers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = lotsofmanagers.xcdatamodel; sourceTree = "<group>"; };
+		7F1C50F816149CD9006C9FB7 /* DocumentCD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentCD.h; sourceTree = "<group>"; };
+		7F1C50F916149CD9006C9FB7 /* DocumentCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentCD.m; sourceTree = "<group>"; };
 		7F22FA0E160B1B48009E3C16 /* CDTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDTaskManager.h; sourceTree = "<group>"; };
 		7F22FA0F160B1B48009E3C16 /* CDTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDTaskManager.m; sourceTree = "<group>"; };
 		7F22FA11160B1B5F009E3C16 /* CDTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDTask.h; sourceTree = "<group>"; };
@@ -397,8 +400,6 @@
 				F08936ED160B655000D5DFE4 /* DataRepository */,
 				41D95D211608A53D0084AD0D /* Default Stuff */,
 				41D95CFF1608A4B50084AD0D /* Supporting Files */,
-				41D95D2C1608A9A30084AD0D /* CDDocument.h */,
-				41D95D2D1608A9A30084AD0D /* CDDocument.m */,
 				41D95D2F1608BB950084AD0D /* NSObject+PerformBlockAfterDelay.h */,
 				41D95D301608BB950084AD0D /* NSObject+PerformBlockAfterDelay.m */,
 			);
@@ -458,6 +459,8 @@
 				7F1C508C16147206006C9FB7 /* CDLocalStorage.h */,
 				7F1C508D16147206006C9FB7 /* CDLocalStorage.m */,
 				7F1C50F51614965B006C9FB7 /* lotsofmanagers.xcdatamodeld */,
+				7F1C50F816149CD9006C9FB7 /* DocumentCD.h */,
+				7F1C50F916149CD9006C9FB7 /* DocumentCD.m */,
 			);
 			name = LocalStorage;
 			sourceTree = "<group>";
@@ -617,6 +620,8 @@
 		7F9D8BA416107B710030CB49 /* Document */ = {
 			isa = PBXGroup;
 			children = (
+				41D95D2C1608A9A30084AD0D /* CDDocument.h */,
+				41D95D2D1608A9A30084AD0D /* CDDocument.m */,
 				7F9D8BA516107B9A0030CB49 /* CDDocumentSearchResult.h */,
 				7F9D8BA616107B9A0030CB49 /* CDDocumentSearchResult.m */,
 			);
@@ -817,6 +822,7 @@
 				7FC3026E16120BEB00DFC1E9 /* CDDocumentPreviewCommand.m in Sources */,
 				7F1C508E16147206006C9FB7 /* CDLocalStorage.m in Sources */,
 				7F1C50F71614965B006C9FB7 /* lotsofmanagers.xcdatamodeld in Sources */,
+				7F1C50FA16149CD9006C9FB7 /* DocumentCD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
