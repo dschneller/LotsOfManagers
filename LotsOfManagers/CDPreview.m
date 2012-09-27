@@ -81,9 +81,12 @@ static NSString* previewDir;
                         [[CDPreviewImageCache sharedInstance] setImage:img forKey:self cost:fs];
                     } else
                     {
-                        @throw [NSException exceptionWithName:@"InternalInconsistencyExceptiopn"
-                                                       reason:[NSString stringWithFormat:@"Image File %@ Size > 0, but could not load image", self.filePath]
-                                                     userInfo:nil];
+						NSLog(@"Image File %@ Size > 0, but could not load image. Deleting file.", self.filePath);
+						[[NSFileManager defaultManager] removeItemAtPath:self.filePath error:&err];
+						if (err)
+						{
+							NSLog(@"Error deleting corrupt image file %@: %@", self.filePath, err);
+						}
                     }
                 }
         }
@@ -106,6 +109,8 @@ static NSString* previewDir;
 
 + (CDPreview*) previewForDocument:(CDDocument*)doc page:(NSUInteger)page resolution:(NSString*)resolution allowPlaceholder:(BOOL)placeholderAllowed
 {
+//	[CDPreviewImageCache sharedInstance]
+	
 	if ([CDPreview availableForDocument:doc page:page withResolution:resolution])
 	{
 		return [[CDPreview alloc] initFromFileForResolution:resolution page:page document:doc];

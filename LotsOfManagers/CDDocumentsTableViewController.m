@@ -319,6 +319,7 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
     {
         cell.textLabel.text = [NSString stringWithFormat:@"%d --- ---", indexPath.row];
 		cell.imageView.image = [UIImage imageNamed:@"stapel-1-dots"];
+		cell.detailTextLabel.text = @"---";
     }
     else
     {
@@ -336,11 +337,13 @@ static CGFloat const kScrollSpeedThreshold = 4.0f;
         {
             cell.textLabel.text = [NSString stringWithFormat:@"%d ...", indexPath.row];
 			cell.imageView.image = [UIImage imageNamed:@"stapel-1-dots"];
-        }
+			cell.detailTextLabel.text = @"...";
+		}
         else
         {
             cell.textLabel.text = [NSString stringWithFormat:@"%d File: %@",indexPath.row, viewModel.documentFileName];
 			cell.imageView.image = viewModel.smallThumbImage;
+			cell.detailTextLabel.text = viewModel.documentId;
         }
     }
     return cell;

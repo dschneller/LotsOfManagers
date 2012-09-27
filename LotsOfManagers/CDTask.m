@@ -110,6 +110,10 @@
     return [self.taskId hash] * [self.taskFamily hash];
 }
 
+-(NSString *)description
+{
+	return [NSString stringWithFormat:@"[CDTask: %@/%@]",self.taskFamily,self.taskId];
+}
 
 
 @end

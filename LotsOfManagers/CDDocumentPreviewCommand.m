@@ -24,6 +24,11 @@ static NSString* kWSPathDocument = @"/document";
 									  delegate:self];
 }
 
+
+-(void)cancel {
+	[[[RKClient sharedClient] requestQueue] cancelRequestsWithDelegate:self];	
+}
+
 -(NSArray*) getAcceptedContentTypes
 {
 	return @[WS_IMAGE_JPG, WS_IMAGE_PNG];

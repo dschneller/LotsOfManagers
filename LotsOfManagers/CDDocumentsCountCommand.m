@@ -34,7 +34,7 @@
 
 
 -(void)cancel {
-//TODO:
+	[[[RKClient sharedClient] requestQueue] cancelRequestsWithDelegate:self];	
 }
 
 

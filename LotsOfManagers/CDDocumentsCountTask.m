@@ -11,7 +11,6 @@
 @implementation CDDocumentsCountTask
 
 
-
 -(void)doYourThing {
 	[self.documentsCountCommand execute];
 }
