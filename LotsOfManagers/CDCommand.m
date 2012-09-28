@@ -54,7 +54,6 @@
 			__sharedInstance.client.authenticationType = RKRequestAuthenticationTypeOAuth2;
 	#warning get the real access token and set it as define value
 			__sharedInstance.client.OAuth2AccessToken = ACCESS_TOKEN_HARD_CODED;
-
 			[__sharedInstance.mappingProvider addObjectMapping:[self cdDocumentSearchResultMapping]];
 		});
 		}

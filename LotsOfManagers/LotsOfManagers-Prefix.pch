@@ -12,7 +12,6 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import "Foundation+CollectionLiteralSubscripts.h"
-	#import <CoreData/CoreData.h>
 
 	#define DOCUMENTS_RETRIEVED_NOTIFICATION @"DOCUMENTS_RETRIEVED"
 	#define ELEMENT_COUNT_RETRIEVED_NOTIFICATION @"ELEMENT_COUNT_RETRIEVED"
